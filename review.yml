@@ -1,0 +1,148 @@
+aid: pixieset
+name: Pixieset
+review:
+  question: Does Pixieset expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-04'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Pixieset publishes no public or
+    partner developer API of any kind - REST, WebSocket, or otherwise. The
+    only relevant surfaces are two internal, session-cookie-authenticated
+    web APIs (Studio API and Gallery API) that Pixieset's own web app calls,
+    both plain request/response REST/JSON over HTTPS per the independent
+    reverse-engineering project that documents them. No server-push,
+    subscription-based, or realtime transport (WebSocket, SSE, or webhooks)
+    is documented anywhere for either surface, so there is nothing to model
+    as AsyncAPI.
+  findings:
+    summary: |
+      Pixieset does not publish a documented public WebSocket API, nor any
+      public or partner developer API at all. Pixieset is a photography
+      business platform (client galleries, website builder, print/digital
+      store, mobile gallery app, and Studio Manager for CRM, booking,
+      invoicing, contracts, and questionnaires) used by hundreds of thousands
+      of photographers. There is no developer program, no self-serve API key
+      or OAuth signup, and no official API reference published by Pixieset -
+      the company's own "Public API" status page (pixieset.instatus.com/public-api)
+      only monitors uptime and links to no documentation or developer portal.
+      Pixieset's products are powered internally by two web APIs used by its
+      own frontends: a Studio API (base https://studio.pixieset.com/api/v1)
+      for CRM, sessions, invoices, contracts, questionnaires, conversations,
+      coupons, and templates, and a Gallery API (base
+      https://galleries.pixieset.com/api/v1) for collections, galleries,
+      client access, downloads, favorites, and store/e-commerce. Both are
+      authenticated purely by the browser session cookie set at web login
+      (studio.pixieset.com/login or galleries.pixieset.com/login), with a
+      CSRF token required for writes - there is no API key or bearer token
+      issued to third parties. An independent developer has reverse-engineered
+      and published unofficial documentation for 111+ endpoints across the
+      two surfaces (trozz.github.io/pixieset-api-docs), explicitly labeled
+      "not affiliated with or endorsed by Pixieset" and subject to breaking
+      changes without notice. Pixieset also has no official Zapier or Make.com
+      integration. No realtime, bidirectional, or streaming WebSocket (ws://
+      or wss://) endpoint is documented anywhere for either internal surface.
+    openSource: |
+      Pixieset is a closed, proprietary hosted SaaS platform; no open-source
+      server, SDK, or client library is published by Pixieset itself. The
+      only public artifact is the third-party, MIT-licensed documentation
+      site (github.com/trozz/pixieset-api-docs) that catalogues the internal
+      API's reverse-engineered shape - it is documentation only, not a client
+      library, and is unaffiliated with Pixieset.
+    transports:
+      - protocol: REST
+        scheme: https
+        baseURL: https://studio.pixieset.com/api/v1
+        documented: false
+        note: >-
+          Internal Studio web-app API (CRM, sessions, invoices, contracts,
+          questionnaires, conversations, coupons, templates). Not published
+          by Pixieset for third-party use; session-cookie authentication
+          only. Endpoint shapes sourced solely from independent
+          reverse-engineering documentation, unverified against Pixieset's
+          current implementation.
+      - protocol: REST
+        scheme: https
+        baseURL: https://galleries.pixieset.com/api/v1
+        documented: false
+        note: >-
+          Internal Gallery web-app API (collections, galleries, client
+          access, downloads, favorites, store). Not published by Pixieset for
+          third-party use; session-cookie authentication only. Endpoint
+          shapes sourced solely from independent reverse-engineering
+          documentation, unverified against Pixieset's current
+          implementation.
+      - protocol: WebSocket
+        scheme: wss
+        documented: false
+        note: No WebSocket endpoint is documented anywhere for either Pixieset internal API surface as of the review date.
+    endpointsConfirmedRest: []
+    endpointsModeled: true
+    endpointsModeledNote: |
+      No endpoint below is officially published by Pixieset - none are
+      "confirmed" in the sense of a company-issued reference. All are
+      modeled from the independent, unofficial reverse-engineering project
+      (trozz.github.io/pixieset-api-docs), which itself carries a disclaimer
+      that it was produced through API analysis rather than sourced from
+      Pixieset. Representative endpoints modeled in this entry's OpenAPI
+      document:
+      Studio API - GET/PUT /clients/{id}, GET /clients/, GET /clients/search,
+      GET/POST /session_types/, GET /session_types/{id}/check-day-avail/{date},
+      GET /sessions, GET /invoices/, GET /invoices/{id}, GET
+      /invoices/invoice_summary, GET /invoices/payments/list/, GET
+      /contracts/, GET /contracts/{id}, GET /templates/contracts, GET/PUT
+      /templates/contracts/{id}.
+      Gallery API - GET /collections/{id}, GET /collections/{id}/galleries,
+      GET /collections/{id}/clients, GET /collections/{id}/downloads/, GET
+      /collections/{id}/favorites.
+      No fields, IDs, or paths were invented beyond what the source project
+      documents; nothing was fabricated for resources the source project does
+      not cover.
+  sources:
+    - url: https://pixieset.instatus.com/public-api
+      type: Documentation
+      note: >-
+        Pixieset's own public status page, titled "Our Public API" - monitors
+        uptime only, links to no developer documentation, API reference, or
+        signup flow.
+    - url: https://trozz.github.io/pixieset-api-docs/
+      type: Documentation
+      note: >-
+        Independent, unofficial reverse-engineered documentation of
+        Pixieset's internal Studio and Gallery APIs (111+ endpoints).
+        Explicitly disclaimed as "not affiliated with or endorsed by
+        Pixieset."
+    - url: https://github.com/trozz/pixieset-api-docs
+      type: SourceCode
+      note: Source repository for the unofficial documentation site, MIT licensed.
+    - url: https://pixieset.com/
+      type: Documentation
+      note: Pixieset marketing site - no developer/API section is linked from primary navigation or footer.
+    - url: https://help.pixieset.com/hc/en-us
+      type: Documentation
+      note: Pixieset's customer help center - covers product usage (e.g. PayPal API credentials for payment setup) but documents no Pixieset-issued API.
+    - url: https://zapier.com/apps/pixieset/integrations
+      type: Documentation
+      note: Confirms Pixieset has no official native Zapier integration as of the review date.
+    - url: https://pixieset.com/pricing-studio/
+      type: Pricing
+      note: Client Gallery subscription tiers (Free through Ultimate).
+    - url: https://pixieset.com/pricing-suite/
+      type: Pricing
+      note: Suite bundle subscription tiers (Starter, Pro, Ultimate) covering Client Gallery, Website, Store, Mobile Gallery App, and Studio Manager.
+  actions:
+    asyncapiPath: null
+    apisYmlUpdated: true
+    reason: |
+      No WebSocket protocol surface exists, and no public API of any protocol
+      exists either - Pixieset publishes no developer program, API reference,
+      API keys, or OAuth signup. The two internal web APIs that power
+      Pixieset's own apps are plain request/response REST authenticated by
+      browser session cookie, documented only by an independent third party
+      through reverse engineering. No AsyncAPI document was created because
+      there is no server-push transport to model, and this apis.yml entry
+      documents the real access model honestly - naming the two internal API
+      surfaces and modeling their endpoint shapes from the sourced
+      reverse-engineering project - rather than fabricating a public API
+      Pixieset does not offer.

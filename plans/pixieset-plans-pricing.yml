@@ -1,0 +1,234 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Pixieset
+providerId: pixieset
+created: '2026-07-04'
+modified: '2026-07-04'
+reconciled: false
+tags:
+- Photography
+- Client Galleries
+- Studio Management
+- Plans
+description: >-
+  Pixieset does not sell API access - there is no developer/API tier at any
+  price point, because there is no public API product. The plans below are
+  Pixieset's ordinary consumer/prosumer product subscriptions (Client Gallery,
+  and the Suite bundle that adds Studio Manager, Website, Store, and the
+  Mobile Gallery App). They are included here only as the real, public pricing
+  context for the platform this entry documents - they gate app features and
+  storage, not API calls. Monthly USD prices are collected from Pixieset's
+  public pricing pages and third-party pricing trackers as of July 2026;
+  third-party sources disagree on exact Pro-tier figures (seen as low as ~$24
+  on annual billing and as high as $50 on monthly billing), so treat all
+  prices as approximate and verify directly on pixieset.com before relying on
+  them. Annual billing is discounted versus monthly; a free tier exists with a
+  15% Pixieset commission on store sales.
+notes: >-
+  No plan, at any price, unlocks a documented public API, an API key, OAuth
+  credentials, or webhook access - Pixieset has no such program. These tiers
+  only affect storage, branding, commission-free sales, video upload minutes,
+  and Studio Manager/Website/Store feature limits inside the Pixieset web and
+  mobile apps.
+sources:
+- https://pixieset.com/pricing-studio/
+- https://pixieset.com/pricing-suite/
+- https://pixieset.com/pricing-studio-manager/
+- https://help.pixieset.com/hc/en-us/articles/9975416939277-Choosing-the-right-Subscription
+plans:
+- id: pixieset-free
+  name: Free
+  type: free
+  description: >-
+    Unlimited collections with up to 3 GB of photo storage, client galleries
+    with review/share/download, and a functional Store with a 15% Pixieset
+    commission on sales. No API access exists at this or any tier.
+  entries:
+  - label: Storage
+    name: storage
+    type: flat
+    metric: storage
+    limit: 3
+    timeFrame: month
+    geo: global
+    unit: GB
+    price: free
+    userMultiplied: false
+  elements:
+  - name: Unlimited Collections
+  - name: Client Gallery
+  - name: Store (15% commission)
+- id: pixieset-basic
+  name: Basic
+  type: paid
+  description: >-
+    Entry paid tier - adds 10 GB storage, 30 minutes of video upload, custom
+    domain connection, removal of Pixieset branding, and commission-free
+    sales.
+  entries:
+  - label: Monthly
+    name: monthly
+    type: flat
+    metric: subscription
+    limit: 1
+    timeFrame: month
+    geo: global
+    unit: 1
+    currency: USD
+    price: '10.00'
+    userMultiplied: false
+  elements:
+  - name: 10 GB Storage
+  - name: 30 Min Video Upload
+  - name: Custom Domain
+  - name: Commission-Free Sales
+- id: pixieset-plus
+  name: Plus
+  type: paid
+  description: >-
+    Mid tier - 100 GB storage and up to one hour of video upload, plus the
+    Basic-tier branding and commission features.
+  entries:
+  - label: Monthly
+    name: monthly
+    type: flat
+    metric: subscription
+    limit: 1
+    timeFrame: month
+    geo: global
+    unit: 1
+    currency: USD
+    price: '20.00'
+    userMultiplied: false
+  elements:
+  - name: 100 GB Storage
+  - name: 1 Hour Video Upload
+  - name: Custom Domain
+  - name: Commission-Free Sales
+- id: pixieset-pro
+  name: Pro
+  type: paid
+  description: >-
+    Higher tier - approximately 1 TB storage, up to two hours of video upload,
+    automatic order fulfillment, and coupon support. Third-party sources
+    disagree on the exact monthly price (~$30 vs ~$50 depending on billing
+    term and observation date) - verify on the live pricing page.
+  entries:
+  - label: Monthly (approximate)
+    name: monthly
+    type: flat
+    metric: subscription
+    limit: 1
+    timeFrame: month
+    geo: global
+    unit: 1
+    currency: USD
+    price: 'approx. 30.00-50.00'
+    userMultiplied: false
+  elements:
+  - name: ~1 TB Storage
+  - name: 2 Hours Video Upload
+  - name: Automatic Fulfillment
+  - name: Coupons
+- id: pixieset-ultimate
+  name: Ultimate
+  type: paid
+  description: >-
+    Top Client Gallery tier - unlimited storage and up to five hours of video
+    upload, with all lower-tier features included.
+  entries:
+  - label: Monthly
+    name: monthly
+    type: flat
+    metric: subscription
+    limit: 1
+    timeFrame: month
+    geo: global
+    unit: 1
+    currency: USD
+    price: '50.00'
+    userMultiplied: false
+  elements:
+  - name: Unlimited Storage
+  - name: 5 Hours Video Upload
+  - name: Automatic Fulfillment
+  - name: Coupons
+- id: pixieset-suite-starter
+  name: Suite Starter
+  type: paid
+  description: >-
+    Entry Suite bundle - Client Gallery, Website, Store, Mobile Gallery App,
+    and Studio Manager together in one subscription rather than purchased
+    separately.
+  entries:
+  - label: Monthly
+    name: monthly
+    type: flat
+    metric: subscription
+    limit: 1
+    timeFrame: month
+    geo: global
+    unit: 1
+    currency: USD
+    price: '28.00'
+    userMultiplied: false
+  elements:
+  - name: Client Gallery
+  - name: Website
+  - name: Store
+  - name: Mobile Gallery App
+  - name: Studio Manager
+- id: pixieset-suite-pro
+  name: Suite Pro
+  type: paid
+  description: Mid Suite bundle tier with higher storage and feature limits
+    across all five bundled apps.
+  entries:
+  - label: Monthly
+    name: monthly
+    type: flat
+    metric: subscription
+    limit: 1
+    timeFrame: month
+    geo: global
+    unit: 1
+    currency: USD
+    price: '38.00'
+    userMultiplied: false
+  elements:
+  - name: Client Gallery
+  - name: Website
+  - name: Store
+  - name: Mobile Gallery App
+  - name: Studio Manager
+- id: pixieset-suite-ultimate
+  name: Suite Ultimate
+  type: paid
+  description: Top Suite bundle tier with the highest storage and feature
+    limits across all five bundled apps.
+  entries:
+  - label: Monthly
+    name: monthly
+    type: flat
+    metric: subscription
+    limit: 1
+    timeFrame: month
+    geo: global
+    unit: 1
+    currency: USD
+    price: '55.00'
+    userMultiplied: false
+  elements:
+  - name: Client Gallery
+  - name: Website
+  - name: Store
+  - name: Mobile Gallery App
+  - name: Studio Manager
+discounts:
+- term: annual
+  description: Pixieset advertises up to a 20% discount for annual billing
+    versus monthly, across both Client Gallery and Suite plans.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
