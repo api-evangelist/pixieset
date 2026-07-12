@@ -145,6 +145,10 @@ apis:
     reverse-engineering documentation, unverified against Pixieset's current
     implementation.
 common:
+- type: DomainSecurity
+  url: security/pixieset-domain-security.yml
+- type: Authentication
+  url: authentication/pixieset-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/pixieset
 - type: Website

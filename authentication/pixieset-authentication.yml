@@ -1,0 +1,20 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/pixieset-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - cookie
+schemes:
+- name: sessionCookie
+  type: apiKey
+  in: cookie
+  parameter: session_cookie
+  description: Session cookie issued by the Pixieset web login flow (studio.pixieset.com/login
+    or galleries.pixieset.com/login). This is the internal web-app session mechanism, not a
+    published API-key or OAuth developer credential - Pixieset does not offer either for third-party
+    use. Write operations additionally require an X-CSRF-Token header per the reverse-engineered
+    documentation.
+  sources:
+  - openapi/pixieset-openapi.yml
