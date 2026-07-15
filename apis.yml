@@ -145,6 +145,8 @@ apis:
     reverse-engineering documentation, unverified against Pixieset's current
     implementation.
 common:
+- type: AgenticAccess
+  url: agentic-access/pixieset-agentic-access.yml
 - type: DomainSecurity
   url: security/pixieset-domain-security.yml
 - type: Authentication
