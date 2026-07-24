@@ -1,0 +1,190 @@
+openapi: 3.0.3
+info:
+  title: Pixieset Studio & Gallery API (Modeled, Unofficial) Clients API
+  description: Pixieset does not publish a public or partner developer API - there is no self-serve API key or OAuth signup, no official API reference, and no developer program. The endpoints below model the internal, session-cookie -authenticated web APIs that power Pixieset's own Studio Manager (studio.pixieset.com) and Client Gallery (galleries.pixieset.com) web apps, as documented by an independent third party (https://trozz.github.io/pixieset-api-docs/, "unofficial documentation created through reverse engineering and API analysis... not affiliated with or endorsed by Pixieset"). Paths, parameters, and response shapes are sourced from that community project (111+ endpoints catalogued there); only a representative subset is modeled here across Clients, Sessions, Invoices, Contracts, and Gallery Collections. Nothing here is independently verified against Pixieset's current implementation - treat this as a best-effort, sourced model rather than an authoritative reference, it may change or disappear without notice, and using it against Pixieset's production systems outside of your own account should be checked against Pixieset's Terms of Service.
+  version: 1.0-modeled
+  contact:
+    name: Pixieset
+    url: https://pixieset.com
+servers:
+- url: https://studio.pixieset.com/api/v1
+  description: Studio API (business management) - modeled, unofficial
+- url: https://galleries.pixieset.com/api/v1
+  description: Gallery API (client delivery & sales) - modeled, unofficial
+security:
+- sessionCookie: []
+tags:
+- name: Clients
+  description: Client and lead CRM records.
+paths:
+  /clients/:
+    get:
+      operationId: listClients
+      tags:
+      - Clients
+      summary: List clients and leads
+      description: Returns a paginated list of client/lead/other contact records. Modeled from the Studio API Clients & CRM reference.
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 1
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          default: 25
+      - name: types
+        in: query
+        description: 'Comma-separated: client, lead, other'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Paginated list of clients.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientListResponse'
+  /clients/search:
+    get:
+      operationId: searchClients
+      tags:
+      - Clients
+      summary: Search clients and leads
+      parameters:
+      - name: q
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: types
+        in: query
+        schema:
+          type: string
+          enum:
+          - all
+          - client
+          - lead
+      - name: page
+        in: query
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          maximum: 100
+      responses:
+        '200':
+          description: Matching clients.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientListResponse'
+  /clients/{client_id}:
+    get:
+      operationId: getClient
+      tags:
+      - Clients
+      summary: Get client details
+      parameters:
+      - name: client_id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: cl_ABC123DEF456GHI789JKL012MNO345
+      responses:
+        '200':
+          description: Client detail.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Client'
+    put:
+      operationId: updateClient
+      tags:
+      - Clients
+      summary: Update a client
+      parameters:
+      - name: client_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Client'
+      responses:
+        '200':
+          description: Updated client.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Client'
+components:
+  schemas:
+    Client:
+      type: object
+      properties:
+        id:
+          type: string
+          example: cl_ABC123DEF456GHI789JKL012MNO345
+        email:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        phone:
+          type: string
+        company:
+          type: string
+          nullable: true
+        status_name:
+          type: string
+          example: Active
+        type:
+          type: string
+          enum:
+          - client
+          - lead
+          - other
+        created_at:
+          type: string
+          format: date-time
+    ClientListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Client'
+        meta:
+          type: object
+          properties:
+            current_page:
+              type: integer
+            per_page:
+              type: integer
+            total:
+              type: integer
+  securitySchemes:
+    sessionCookie:
+      type: apiKey
+      in: cookie
+      name: session_cookie
+      description: Session cookie issued by the Pixieset web login flow (studio.pixieset.com/login or galleries.pixieset.com/login). This is the internal web-app session mechanism, not a published API-key or OAuth developer credential - Pixieset does not offer either for third-party use. Write operations additionally require an X-CSRF-Token header per the reverse-engineered documentation.
+externalDocs:
+  description: Unofficial Pixieset API documentation (trozz/pixieset-api-docs)
+  url: https://trozz.github.io/pixieset-api-docs/

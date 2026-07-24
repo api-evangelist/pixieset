@@ -1,0 +1,134 @@
+openapi: 3.0.3
+info:
+  title: Pixieset Studio & Gallery API (Modeled, Unofficial) Clients Sessions API
+  description: Pixieset does not publish a public or partner developer API - there is no self-serve API key or OAuth signup, no official API reference, and no developer program. The endpoints below model the internal, session-cookie -authenticated web APIs that power Pixieset's own Studio Manager (studio.pixieset.com) and Client Gallery (galleries.pixieset.com) web apps, as documented by an independent third party (https://trozz.github.io/pixieset-api-docs/, "unofficial documentation created through reverse engineering and API analysis... not affiliated with or endorsed by Pixieset"). Paths, parameters, and response shapes are sourced from that community project (111+ endpoints catalogued there); only a representative subset is modeled here across Clients, Sessions, Invoices, Contracts, and Gallery Collections. Nothing here is independently verified against Pixieset's current implementation - treat this as a best-effort, sourced model rather than an authoritative reference, it may change or disappear without notice, and using it against Pixieset's production systems outside of your own account should be checked against Pixieset's Terms of Service.
+  version: 1.0-modeled
+  contact:
+    name: Pixieset
+    url: https://pixieset.com
+servers:
+- url: https://studio.pixieset.com/api/v1
+  description: Studio API (business management) - modeled, unofficial
+- url: https://galleries.pixieset.com/api/v1
+  description: Gallery API (client delivery & sales) - modeled, unofficial
+security:
+- sessionCookie: []
+tags:
+- name: Sessions
+  description: Bookable session types, scheduling, and availability.
+paths:
+  /session_types/:
+    get:
+      operationId: listSessionTypes
+      tags:
+      - Sessions
+      summary: List session types
+      description: Bookable service definitions with scheduling and payment config.
+      responses:
+        '200':
+          description: List of session types.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SessionType'
+    post:
+      operationId: createSessionType
+      tags:
+      - Sessions
+      summary: Create a session type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SessionType'
+      responses:
+        '201':
+          description: Created session type.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/SessionType'
+  /session_types/{session_type_id}/check-day-avail/{date_timezone}:
+    get:
+      operationId: checkDayAvailability
+      tags:
+      - Sessions
+      summary: Check day availability for a session type
+      parameters:
+      - name: session_type_id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: set_SES001ABC123DEF456GHI789JKL012
+      - name: date_timezone
+        in: path
+        required: true
+        description: 'Format: YYYY-M-D-Area/City, e.g. 2025-8-7-Europe/London'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Availability for the requested day.
+          content:
+            application/json:
+              schema:
+                type: object
+  /sessions:
+    get:
+      operationId: listSessions
+      tags:
+      - Sessions
+      summary: List booked sessions
+      responses:
+        '200':
+          description: Booked sessions with client and session-type info.
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    SessionType:
+      type: object
+      properties:
+        id:
+          type: string
+          example: set_SES001ABC123DEF456GHI789JKL012
+        name:
+          type: string
+        status:
+          type: string
+          enum:
+          - published
+          - draft
+        duration:
+          type: integer
+          description: Minutes
+        location:
+          type: string
+        payment_amount_full:
+          type: integer
+          description: Smallest currency unit
+        currency:
+          type: string
+          example: gbp
+        collect_payment:
+          type: boolean
+  securitySchemes:
+    sessionCookie:
+      type: apiKey
+      in: cookie
+      name: session_cookie
+      description: Session cookie issued by the Pixieset web login flow (studio.pixieset.com/login or galleries.pixieset.com/login). This is the internal web-app session mechanism, not a published API-key or OAuth developer credential - Pixieset does not offer either for third-party use. Write operations additionally require an X-CSRF-Token header per the reverse-engineered documentation.
+externalDocs:
+  description: Unofficial Pixieset API documentation (trozz/pixieset-api-docs)
+  url: https://trozz.github.io/pixieset-api-docs/

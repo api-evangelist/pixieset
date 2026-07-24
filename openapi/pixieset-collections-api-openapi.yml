@@ -1,0 +1,168 @@
+openapi: 3.0.3
+info:
+  title: Pixieset Studio & Gallery API (Modeled, Unofficial) Clients Collections API
+  description: Pixieset does not publish a public or partner developer API - there is no self-serve API key or OAuth signup, no official API reference, and no developer program. The endpoints below model the internal, session-cookie -authenticated web APIs that power Pixieset's own Studio Manager (studio.pixieset.com) and Client Gallery (galleries.pixieset.com) web apps, as documented by an independent third party (https://trozz.github.io/pixieset-api-docs/, "unofficial documentation created through reverse engineering and API analysis... not affiliated with or endorsed by Pixieset"). Paths, parameters, and response shapes are sourced from that community project (111+ endpoints catalogued there); only a representative subset is modeled here across Clients, Sessions, Invoices, Contracts, and Gallery Collections. Nothing here is independently verified against Pixieset's current implementation - treat this as a best-effort, sourced model rather than an authoritative reference, it may change or disappear without notice, and using it against Pixieset's production systems outside of your own account should be checked against Pixieset's Terms of Service.
+  version: 1.0-modeled
+  contact:
+    name: Pixieset
+    url: https://pixieset.com
+servers:
+- url: https://studio.pixieset.com/api/v1
+  description: Studio API (business management) - modeled, unofficial
+- url: https://galleries.pixieset.com/api/v1
+  description: Gallery API (client delivery & sales) - modeled, unofficial
+security:
+- sessionCookie: []
+tags:
+- name: Collections
+  description: Gallery collections, access, and downloads.
+paths:
+  /collections/{collection_id}:
+    get:
+      operationId: getCollection
+      tags:
+      - Collections
+      summary: Get gallery collection details
+      servers:
+      - url: https://galleries.pixieset.com/api/v1
+      parameters:
+      - name: collection_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          example: 90516387
+      - name: expand
+        in: query
+        schema:
+          type: string
+          example: video_cover
+      responses:
+        '200':
+          description: Collection detail.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Collection'
+  /collections/{collection_id}/galleries:
+    get:
+      operationId: listCollectionGalleries
+      tags:
+      - Collections
+      summary: List galleries in a collection
+      servers:
+      - url: https://galleries.pixieset.com/api/v1
+      parameters:
+      - name: collection_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Galleries within the collection.
+          content:
+            application/json:
+              schema:
+                type: object
+  /collections/{collection_id}/clients:
+    get:
+      operationId: listCollectionClients
+      tags:
+      - Collections
+      summary: List clients with access to a collection
+      servers:
+      - url: https://galleries.pixieset.com/api/v1
+      parameters:
+      - name: collection_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Clients with access, permission level, and favorites count.
+          content:
+            application/json:
+              schema:
+                type: object
+  /collections/{collection_id}/downloads/:
+    get:
+      operationId: listCollectionDownloads
+      tags:
+      - Collections
+      summary: List all download activity for a collection
+      servers:
+      - url: https://galleries.pixieset.com/api/v1
+      parameters:
+      - name: collection_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Combined photo and video download activity.
+          content:
+            application/json:
+              schema:
+                type: object
+  /collections/{collection_id}/favorites:
+    get:
+      operationId: listCollectionFavorites
+      tags:
+      - Collections
+      summary: List client-favorited photos and videos in a collection
+      servers:
+      - url: https://galleries.pixieset.com/api/v1
+      parameters:
+      - name: collection_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Favorited media with client attribution.
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    Collection:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 90516387
+        name:
+          type: string
+        description:
+          type: string
+        gallery_count:
+          type: integer
+        photo_count:
+          type: integer
+        video_count:
+          type: integer
+        password_protected:
+          type: boolean
+        downloadable:
+          type: boolean
+        expiry_date:
+          type: string
+          format: date
+          nullable: true
+  securitySchemes:
+    sessionCookie:
+      type: apiKey
+      in: cookie
+      name: session_cookie
+      description: Session cookie issued by the Pixieset web login flow (studio.pixieset.com/login or galleries.pixieset.com/login). This is the internal web-app session mechanism, not a published API-key or OAuth developer credential - Pixieset does not offer either for third-party use. Write operations additionally require an X-CSRF-Token header per the reverse-engineered documentation.
+externalDocs:
+  description: Unofficial Pixieset API documentation (trozz/pixieset-api-docs)
+  url: https://trozz.github.io/pixieset-api-docs/

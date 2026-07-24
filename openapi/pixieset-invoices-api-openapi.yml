@@ -1,0 +1,206 @@
+openapi: 3.0.3
+info:
+  title: Pixieset Studio & Gallery API (Modeled, Unofficial) Clients Invoices API
+  description: Pixieset does not publish a public or partner developer API - there is no self-serve API key or OAuth signup, no official API reference, and no developer program. The endpoints below model the internal, session-cookie -authenticated web APIs that power Pixieset's own Studio Manager (studio.pixieset.com) and Client Gallery (galleries.pixieset.com) web apps, as documented by an independent third party (https://trozz.github.io/pixieset-api-docs/, "unofficial documentation created through reverse engineering and API analysis... not affiliated with or endorsed by Pixieset"). Paths, parameters, and response shapes are sourced from that community project (111+ endpoints catalogued there); only a representative subset is modeled here across Clients, Sessions, Invoices, Contracts, and Gallery Collections. Nothing here is independently verified against Pixieset's current implementation - treat this as a best-effort, sourced model rather than an authoritative reference, it may change or disappear without notice, and using it against Pixieset's production systems outside of your own account should be checked against Pixieset's Terms of Service.
+  version: 1.0-modeled
+  contact:
+    name: Pixieset
+    url: https://pixieset.com
+servers:
+- url: https://studio.pixieset.com/api/v1
+  description: Studio API (business management) - modeled, unofficial
+- url: https://galleries.pixieset.com/api/v1
+  description: Gallery API (client delivery & sales) - modeled, unofficial
+security:
+- sessionCookie: []
+tags:
+- name: Invoices
+  description: Invoices and payments.
+paths:
+  /invoices/:
+    get:
+      operationId: listInvoices
+      tags:
+      - Invoices
+      summary: List invoices
+      parameters:
+      - name: expand
+        in: query
+        schema:
+          type: string
+          example: client
+      - name: timeframe_filter
+        in: query
+        schema:
+          type: string
+          example: this_month
+      - name: currency
+        in: query
+        schema:
+          type: string
+          example: usd
+      - name: payment_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - all
+          - paid
+          - unpaid
+          - overdue
+      responses:
+        '200':
+          description: Paginated list of invoices.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Invoice'
+  /invoices/{invoice_id}:
+    get:
+      operationId: getInvoice
+      tags:
+      - Invoices
+      summary: Get invoice details
+      parameters:
+      - name: invoice_id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: in_INV001ABC123DEF456GHI789JKL012
+      - name: expand
+        in: query
+        schema:
+          type: string
+          example: all
+      responses:
+        '200':
+          description: Invoice detail with line items and payments.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Invoice'
+  /invoices/invoice_summary:
+    get:
+      operationId: getInvoiceSummary
+      tags:
+      - Invoices
+      summary: Get invoice summary statistics
+      parameters:
+      - name: timeframe_filter
+        in: query
+        schema:
+          type: string
+      - name: currency
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Summary totals for invoices.
+          content:
+            application/json:
+              schema:
+                type: object
+  /invoices/payments/list/:
+    get:
+      operationId: listInvoicePayments
+      tags:
+      - Invoices
+      summary: List payments across all invoices
+      parameters:
+      - name: expand
+        in: query
+        schema:
+          type: string
+          example: client
+      - name: client_id
+        in: query
+        schema:
+          type: string
+      - name: page_size
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Paginated list of payments.
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    Client:
+      type: object
+      properties:
+        id:
+          type: string
+          example: cl_ABC123DEF456GHI789JKL012MNO345
+        email:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        phone:
+          type: string
+        company:
+          type: string
+          nullable: true
+        status_name:
+          type: string
+          example: Active
+        type:
+          type: string
+          enum:
+          - client
+          - lead
+          - other
+        created_at:
+          type: string
+          format: date-time
+    Invoice:
+      type: object
+      properties:
+        id:
+          type: string
+          example: in_INV001ABC123DEF456GHI789JKL012
+        invoice_number:
+          type: string
+        amount:
+          type: integer
+          description: Smallest currency unit
+        amount_formatted:
+          type: string
+        currency:
+          type: string
+        status:
+          type: string
+          enum:
+          - draft
+          - sent
+          - paid
+          - overdue
+        due_date:
+          type: string
+          format: date
+        client:
+          $ref: '#/components/schemas/Client'
+  securitySchemes:
+    sessionCookie:
+      type: apiKey
+      in: cookie
+      name: session_cookie
+      description: Session cookie issued by the Pixieset web login flow (studio.pixieset.com/login or galleries.pixieset.com/login). This is the internal web-app session mechanism, not a published API-key or OAuth developer credential - Pixieset does not offer either for third-party use. Write operations additionally require an X-CSRF-Token header per the reverse-engineered documentation.
+externalDocs:
+  description: Unofficial Pixieset API documentation (trozz/pixieset-api-docs)
+  url: https://trozz.github.io/pixieset-api-docs/

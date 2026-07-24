@@ -1,0 +1,198 @@
+openapi: 3.0.3
+info:
+  title: Pixieset Studio & Gallery API (Modeled, Unofficial) Clients Contracts API
+  description: Pixieset does not publish a public or partner developer API - there is no self-serve API key or OAuth signup, no official API reference, and no developer program. The endpoints below model the internal, session-cookie -authenticated web APIs that power Pixieset's own Studio Manager (studio.pixieset.com) and Client Gallery (galleries.pixieset.com) web apps, as documented by an independent third party (https://trozz.github.io/pixieset-api-docs/, "unofficial documentation created through reverse engineering and API analysis... not affiliated with or endorsed by Pixieset"). Paths, parameters, and response shapes are sourced from that community project (111+ endpoints catalogued there); only a representative subset is modeled here across Clients, Sessions, Invoices, Contracts, and Gallery Collections. Nothing here is independently verified against Pixieset's current implementation - treat this as a best-effort, sourced model rather than an authoritative reference, it may change or disappear without notice, and using it against Pixieset's production systems outside of your own account should be checked against Pixieset's Terms of Service.
+  version: 1.0-modeled
+  contact:
+    name: Pixieset
+    url: https://pixieset.com
+servers:
+- url: https://studio.pixieset.com/api/v1
+  description: Studio API (business management) - modeled, unofficial
+- url: https://galleries.pixieset.com/api/v1
+  description: Gallery API (client delivery & sales) - modeled, unofficial
+security:
+- sessionCookie: []
+tags:
+- name: Contracts
+  description: Contracts and contract templates.
+paths:
+  /contracts/:
+    get:
+      operationId: listContracts
+      tags:
+      - Contracts
+      summary: List contracts
+      parameters:
+      - name: expand
+        in: query
+        schema:
+          type: string
+          example: all
+      - name: page
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Paginated list of contracts.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Contract'
+  /contracts/{contract_id}:
+    get:
+      operationId: getContract
+      tags:
+      - Contracts
+      summary: Get contract details
+      parameters:
+      - name: contract_id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: co_CON001ABC123DEF456GHI789JKL012
+      - name: expand
+        in: query
+        schema:
+          type: string
+          example: all
+      responses:
+        '200':
+          description: Contract detail with rendered content and signatures.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Contract'
+  /templates/contracts:
+    get:
+      operationId: listContractTemplates
+      tags:
+      - Contracts
+      summary: List contract templates
+      responses:
+        '200':
+          description: List of contract templates.
+          content:
+            application/json:
+              schema:
+                type: object
+  /templates/contracts/{template_id}:
+    get:
+      operationId: getContractTemplate
+      tags:
+      - Contracts
+      summary: Get contract template details
+      parameters:
+      - name: template_id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ct_CON002ABC123DEF456GHI789JKL012
+      responses:
+        '200':
+          description: Contract template detail with HTML body and variables.
+          content:
+            application/json:
+              schema:
+                type: object
+    put:
+      operationId: updateContractTemplate
+      tags:
+      - Contracts
+      summary: Update a contract template
+      parameters:
+      - name: template_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Updated contract template.
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    Client:
+      type: object
+      properties:
+        id:
+          type: string
+          example: cl_ABC123DEF456GHI789JKL012MNO345
+        email:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        phone:
+          type: string
+        company:
+          type: string
+          nullable: true
+        status_name:
+          type: string
+          example: Active
+        type:
+          type: string
+          enum:
+          - client
+          - lead
+          - other
+        created_at:
+          type: string
+          format: date-time
+    Contract:
+      type: object
+      properties:
+        id:
+          type: string
+          example: co_CON001ABC123DEF456GHI789JKL012
+        contract_number:
+          type: string
+        status:
+          type: string
+          enum:
+          - draft
+          - sent
+          - viewed
+          - partially_signed
+          - signed
+          - expired
+          - cancelled
+        due_date:
+          type: string
+          format: date-time
+        signed_date:
+          type: string
+          format: date-time
+          nullable: true
+        client:
+          $ref: '#/components/schemas/Client'
+  securitySchemes:
+    sessionCookie:
+      type: apiKey
+      in: cookie
+      name: session_cookie
+      description: Session cookie issued by the Pixieset web login flow (studio.pixieset.com/login or galleries.pixieset.com/login). This is the internal web-app session mechanism, not a published API-key or OAuth developer credential - Pixieset does not offer either for third-party use. Write operations additionally require an X-CSRF-Token header per the reverse-engineered documentation.
+externalDocs:
+  description: Unofficial Pixieset API documentation (trozz/pixieset-api-docs)
+  url: https://trozz.github.io/pixieset-api-docs/
