@@ -19,7 +19,20 @@ description: Pixieset is an all-in-one photography business platform - client
   are modeled from that third-party reverse-engineering effort, not from any
   Pixieset-published reference - treat them as unverified and subject to
   change or removal without notice.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/pixieset.png
 tags:
 - Photography
 - Client Galleries
@@ -33,117 +46,126 @@ created: '2026-07-04'
 modified: '2026-07-04'
 specificationVersion: '0.19'
 apis:
-- aid: pixieset:pixieset-studio-clients-crm-api
-  name: Pixieset Studio Clients & CRM API
-  tags:
-  - Clients
-  - CRM
-  - Leads
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+- aid: pixieset:pixieset-clients-api
+  name: Pixieset Clients API
+  description: Client and lead CRM records.
   humanURL: https://trozz.github.io/pixieset-api-docs/docs/studio-api/clients
   baseURL: https://studio.pixieset.com/api/v1
-  properties:
-  - url: https://trozz.github.io/pixieset-api-docs/docs/studio-api/overview
-    type: Documentation
-  - url: https://trozz.github.io/pixieset-api-docs/docs/studio-api/clients
-    type: APIReference
-  - url: openapi/pixieset-openapi.yml
-    type: OpenAPI
-  description: Internal client relationship management surface of Pixieset's
-    own Studio web app - list, search, retrieve, and update clients and leads
-    (id prefix cl_), their address info, notes, associated galleries, and
-    documents. Not a Pixieset-published API; endpoint shapes are modeled from
-    unofficial third-party reverse-engineering documentation and are
-    unverified against Pixieset's current implementation.
-- aid: pixieset:pixieset-studio-sessions-booking-api
-  name: Pixieset Studio Sessions & Booking API
   tags:
-  - Sessions
-  - Bookings
-  - Scheduling
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://trozz.github.io/pixieset-api-docs/docs/studio-api/sessions
-  baseURL: https://studio.pixieset.com/api/v1
+  - Clients
   properties:
-  - url: https://trozz.github.io/pixieset-api-docs/docs/studio-api/sessions
-    type: APIReference
-  - url: openapi/pixieset-openapi.yml
-    type: OpenAPI
-  description: Internal session-type and booking surface used by the Studio
-    web app - define bookable session types (id prefix set_) with duration,
-    location, pricing, and payment methods, check day/month availability,
-    manage schedules and interval overrides, and list booked sessions and
-    pending inquiries. Not a Pixieset-published API; modeled from unofficial
-    reverse-engineering documentation, unverified against Pixieset's current
-    implementation.
-- aid: pixieset:pixieset-studio-invoices-payments-api
-  name: Pixieset Studio Invoices & Payments API
+  - type: OpenAPI
+    url: openapi/pixieset-clients-api-openapi.yml
+  - type: Documentation
+    url: https://trozz.github.io/pixieset-api-docs/docs/studio-api/overview
+  - type: APIReference
+    url: https://trozz.github.io/pixieset-api-docs/docs/studio-api/clients
+  - type: APIReference
+    url: https://trozz.github.io/pixieset-api-docs/docs/studio-api/sessions
+  - type: APIReference
+    url: https://trozz.github.io/pixieset-api-docs/docs/studio-api/invoices
+  - type: APIReference
+    url: https://trozz.github.io/pixieset-api-docs/docs/studio-api/contracts
+  - type: Documentation
+    url: https://trozz.github.io/pixieset-api-docs/docs/gallery-api/overview
+  - type: APIReference
+    url: https://trozz.github.io/pixieset-api-docs/docs/gallery-api/collections
+- aid: pixieset:pixieset-collections-api
+  name: Pixieset Collections API
+  description: Gallery collections, access, and downloads.
+  humanURL: https://trozz.github.io/pixieset-api-docs/docs/studio-api/clients
+  baseURL: https://studio.pixieset.com/api/v1
   tags:
-  - Invoices
-  - Payments
-  - Billing
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://trozz.github.io/pixieset-api-docs/docs/studio-api/invoices
-  baseURL: https://studio.pixieset.com/api/v1
+  - Collections
   properties:
-  - url: https://trozz.github.io/pixieset-api-docs/docs/studio-api/invoices
-    type: APIReference
-  - url: openapi/pixieset-openapi.yml
-    type: OpenAPI
-  description: Internal invoicing and payment surface used by the Studio web
-    app - list and retrieve invoices (id prefix in_) and line items in the
-    smallest currency unit, read per-invoice and per-client payment records
-    (id prefix ip_) including processor/transaction fees and card/PayPal
-    details, invoice summaries and currency totals, and disputed-payment
-    counts. Not a Pixieset-published API; modeled from unofficial
-    reverse-engineering documentation, unverified against Pixieset's current
-    implementation.
-- aid: pixieset:pixieset-studio-contracts-api
-  name: Pixieset Studio Contracts API
+  - type: OpenAPI
+    url: openapi/pixieset-collections-api-openapi.yml
+  - type: Documentation
+    url: https://trozz.github.io/pixieset-api-docs/docs/studio-api/overview
+  - type: APIReference
+    url: https://trozz.github.io/pixieset-api-docs/docs/studio-api/clients
+  - type: APIReference
+    url: https://trozz.github.io/pixieset-api-docs/docs/studio-api/sessions
+  - type: APIReference
+    url: https://trozz.github.io/pixieset-api-docs/docs/studio-api/invoices
+  - type: APIReference
+    url: https://trozz.github.io/pixieset-api-docs/docs/studio-api/contracts
+  - type: Documentation
+    url: https://trozz.github.io/pixieset-api-docs/docs/gallery-api/overview
+  - type: APIReference
+    url: https://trozz.github.io/pixieset-api-docs/docs/gallery-api/collections
+- aid: pixieset:pixieset-contracts-api
+  name: Pixieset Contracts API
+  description: Contracts and contract templates.
+  humanURL: https://trozz.github.io/pixieset-api-docs/docs/studio-api/clients
+  baseURL: https://studio.pixieset.com/api/v1
   tags:
   - Contracts
-  - Documents
-  - E-Signature
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://trozz.github.io/pixieset-api-docs/docs/studio-api/contracts
+  properties:
+  - type: OpenAPI
+    url: openapi/pixieset-contracts-api-openapi.yml
+  - type: Documentation
+    url: https://trozz.github.io/pixieset-api-docs/docs/studio-api/overview
+  - type: APIReference
+    url: https://trozz.github.io/pixieset-api-docs/docs/studio-api/clients
+  - type: APIReference
+    url: https://trozz.github.io/pixieset-api-docs/docs/studio-api/sessions
+  - type: APIReference
+    url: https://trozz.github.io/pixieset-api-docs/docs/studio-api/invoices
+  - type: APIReference
+    url: https://trozz.github.io/pixieset-api-docs/docs/studio-api/contracts
+  - type: Documentation
+    url: https://trozz.github.io/pixieset-api-docs/docs/gallery-api/overview
+  - type: APIReference
+    url: https://trozz.github.io/pixieset-api-docs/docs/gallery-api/collections
+- aid: pixieset:pixieset-invoices-api
+  name: Pixieset Invoices API
+  description: Invoices and payments.
+  humanURL: https://trozz.github.io/pixieset-api-docs/docs/studio-api/clients
   baseURL: https://studio.pixieset.com/api/v1
-  properties:
-  - url: https://trozz.github.io/pixieset-api-docs/docs/studio-api/contracts
-    type: APIReference
-  - url: openapi/pixieset-openapi.yml
-    type: OpenAPI
-  description: Internal contracts surface used by the Studio web app - list
-    and retrieve client contracts (id prefix co_) with rendered HTML content,
-    due dates, status, and multi-party signature records, plus manage reusable
-    contract templates (id prefix ct_) with HTML body, `{{variable}}`
-    placeholders, signer configuration, and due-day/reminder settings. Not a
-    Pixieset-published API; modeled from unofficial reverse-engineering
-    documentation, unverified against Pixieset's current implementation.
-- aid: pixieset:pixieset-gallery-collections-delivery-api
-  name: Pixieset Gallery Collections & Delivery API
   tags:
-  - Galleries
-  - Collections
-  - Client Delivery
-  - E-Commerce
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://trozz.github.io/pixieset-api-docs/docs/gallery-api/overview
-  baseURL: https://galleries.pixieset.com/api/v1
+  - Invoices
   properties:
-  - url: https://trozz.github.io/pixieset-api-docs/docs/gallery-api/overview
-    type: Documentation
-  - url: https://trozz.github.io/pixieset-api-docs/docs/gallery-api/collections
-    type: APIReference
-  - url: openapi/pixieset-openapi.yml
-    type: OpenAPI
-  description: Internal gallery-delivery surface used by Pixieset's client
-    galleries product - manage collections that group galleries of photos and
-    videos, control password protection, expiry, and per-client access, list
-    collection clients and visitor emails, and track photo/video downloads,
-    sharing links, and client favorites for the built-in print/digital-sales
-    store. Not a Pixieset-published API; modeled from unofficial
-    reverse-engineering documentation, unverified against Pixieset's current
-    implementation.
+  - type: OpenAPI
+    url: openapi/pixieset-invoices-api-openapi.yml
+  - type: Documentation
+    url: https://trozz.github.io/pixieset-api-docs/docs/studio-api/overview
+  - type: APIReference
+    url: https://trozz.github.io/pixieset-api-docs/docs/studio-api/clients
+  - type: APIReference
+    url: https://trozz.github.io/pixieset-api-docs/docs/studio-api/sessions
+  - type: APIReference
+    url: https://trozz.github.io/pixieset-api-docs/docs/studio-api/invoices
+  - type: APIReference
+    url: https://trozz.github.io/pixieset-api-docs/docs/studio-api/contracts
+  - type: Documentation
+    url: https://trozz.github.io/pixieset-api-docs/docs/gallery-api/overview
+  - type: APIReference
+    url: https://trozz.github.io/pixieset-api-docs/docs/gallery-api/collections
+- aid: pixieset:pixieset-sessions-api
+  name: Pixieset Sessions API
+  description: Bookable session types, scheduling, and availability.
+  humanURL: https://trozz.github.io/pixieset-api-docs/docs/studio-api/clients
+  baseURL: https://studio.pixieset.com/api/v1
+  tags:
+  - Sessions
+  properties:
+  - type: OpenAPI
+    url: openapi/pixieset-sessions-api-openapi.yml
+  - type: Documentation
+    url: https://trozz.github.io/pixieset-api-docs/docs/studio-api/overview
+  - type: APIReference
+    url: https://trozz.github.io/pixieset-api-docs/docs/studio-api/clients
+  - type: APIReference
+    url: https://trozz.github.io/pixieset-api-docs/docs/studio-api/sessions
+  - type: APIReference
+    url: https://trozz.github.io/pixieset-api-docs/docs/studio-api/invoices
+  - type: APIReference
+    url: https://trozz.github.io/pixieset-api-docs/docs/studio-api/contracts
+  - type: Documentation
+    url: https://trozz.github.io/pixieset-api-docs/docs/gallery-api/overview
+  - type: APIReference
+    url: https://trozz.github.io/pixieset-api-docs/docs/gallery-api/collections
 common:
 - type: AgenticAccess
   url: agentic-access/pixieset-agentic-access.yml
