@@ -1,0 +1,564 @@
+openapi: 3.0.3
+info:
+  title: Pixieset Studio & Gallery API (Modeled, Unofficial)
+  description: >-
+    Pixieset does not publish a public or partner developer API - there is no
+    self-serve API key or OAuth signup, no official API reference, and no
+    developer program. The endpoints below model the internal, session-cookie
+    -authenticated web APIs that power Pixieset's own Studio Manager
+    (studio.pixieset.com) and Client Gallery (galleries.pixieset.com) web
+    apps, as documented by an independent third party
+    (https://trozz.github.io/pixieset-api-docs/, "unofficial documentation
+    created through reverse engineering and API analysis... not affiliated
+    with or endorsed by Pixieset"). Paths, parameters, and response shapes are
+    sourced from that community project (111+ endpoints catalogued there);
+    only a representative subset is modeled here across Clients, Sessions,
+    Invoices, Contracts, and Gallery Collections. Nothing here is
+    independently verified against Pixieset's current implementation -
+    treat this as a best-effort, sourced model rather than an authoritative
+    reference, it may change or disappear without notice, and using it against
+    Pixieset's production systems outside of your own account should be
+    checked against Pixieset's Terms of Service.
+  version: '1.0-modeled'
+  contact:
+    name: Pixieset
+    url: https://pixieset.com
+externalDocs:
+  description: Unofficial Pixieset API documentation (trozz/pixieset-api-docs)
+  url: https://trozz.github.io/pixieset-api-docs/
+servers:
+  - url: https://studio.pixieset.com/api/v1
+    description: Studio API (business management) - modeled, unofficial
+  - url: https://galleries.pixieset.com/api/v1
+    description: Gallery API (client delivery & sales) - modeled, unofficial
+security:
+  - sessionCookie: []
+tags:
+  - name: Clients
+    description: Client and lead CRM records.
+  - name: Sessions
+    description: Bookable session types, scheduling, and availability.
+  - name: Invoices
+    description: Invoices and payments.
+  - name: Contracts
+    description: Contracts and contract templates.
+  - name: Collections
+    description: Gallery collections, access, and downloads.
+paths:
+  /clients/:
+    get:
+      operationId: listClients
+      tags: [Clients]
+      summary: List clients and leads
+      description: >-
+        Returns a paginated list of client/lead/other contact records.
+        Modeled from the Studio API Clients & CRM reference.
+      parameters:
+        - name: page
+          in: query
+          schema: { type: integer, default: 1 }
+        - name: per_page
+          in: query
+          schema: { type: integer, default: 25 }
+        - name: types
+          in: query
+          description: "Comma-separated: client, lead, other"
+          schema: { type: string }
+      responses:
+        '200':
+          description: Paginated list of clients.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ClientListResponse' }
+  /clients/search:
+    get:
+      operationId: searchClients
+      tags: [Clients]
+      summary: Search clients and leads
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema: { type: string }
+        - name: types
+          in: query
+          schema: { type: string, enum: [all, client, lead] }
+        - name: page
+          in: query
+          schema: { type: integer }
+        - name: pageSize
+          in: query
+          schema: { type: integer, maximum: 100 }
+      responses:
+        '200':
+          description: Matching clients.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ClientListResponse' }
+  /clients/{client_id}:
+    get:
+      operationId: getClient
+      tags: [Clients]
+      summary: Get client details
+      parameters:
+        - name: client_id
+          in: path
+          required: true
+          schema: { type: string, example: cl_ABC123DEF456GHI789JKL012MNO345 }
+      responses:
+        '200':
+          description: Client detail.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: { $ref: '#/components/schemas/Client' }
+    put:
+      operationId: updateClient
+      tags: [Clients]
+      summary: Update a client
+      parameters:
+        - name: client_id
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Client' }
+      responses:
+        '200':
+          description: Updated client.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: { $ref: '#/components/schemas/Client' }
+  /session_types/:
+    get:
+      operationId: listSessionTypes
+      tags: [Sessions]
+      summary: List session types
+      description: Bookable service definitions with scheduling and payment config.
+      responses:
+        '200':
+          description: List of session types.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items: { $ref: '#/components/schemas/SessionType' }
+    post:
+      operationId: createSessionType
+      tags: [Sessions]
+      summary: Create a session type
+      requestBody:
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/SessionType' }
+      responses:
+        '201':
+          description: Created session type.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: { $ref: '#/components/schemas/SessionType' }
+  /session_types/{session_type_id}/check-day-avail/{date_timezone}:
+    get:
+      operationId: checkDayAvailability
+      tags: [Sessions]
+      summary: Check day availability for a session type
+      parameters:
+        - name: session_type_id
+          in: path
+          required: true
+          schema: { type: string, example: set_SES001ABC123DEF456GHI789JKL012 }
+        - name: date_timezone
+          in: path
+          required: true
+          description: "Format: YYYY-M-D-Area/City, e.g. 2025-8-7-Europe/London"
+          schema: { type: string }
+      responses:
+        '200':
+          description: Availability for the requested day.
+          content:
+            application/json:
+              schema: { type: object }
+  /sessions:
+    get:
+      operationId: listSessions
+      tags: [Sessions]
+      summary: List booked sessions
+      responses:
+        '200':
+          description: Booked sessions with client and session-type info.
+          content:
+            application/json:
+              schema: { type: object }
+  /invoices/:
+    get:
+      operationId: listInvoices
+      tags: [Invoices]
+      summary: List invoices
+      parameters:
+        - name: expand
+          in: query
+          schema: { type: string, example: client }
+        - name: timeframe_filter
+          in: query
+          schema: { type: string, example: this_month }
+        - name: currency
+          in: query
+          schema: { type: string, example: usd }
+        - name: payment_type
+          in: query
+          schema: { type: string, enum: [all, paid, unpaid, overdue] }
+      responses:
+        '200':
+          description: Paginated list of invoices.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items: { $ref: '#/components/schemas/Invoice' }
+  /invoices/{invoice_id}:
+    get:
+      operationId: getInvoice
+      tags: [Invoices]
+      summary: Get invoice details
+      parameters:
+        - name: invoice_id
+          in: path
+          required: true
+          schema: { type: string, example: in_INV001ABC123DEF456GHI789JKL012 }
+        - name: expand
+          in: query
+          schema: { type: string, example: all }
+      responses:
+        '200':
+          description: Invoice detail with line items and payments.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: { $ref: '#/components/schemas/Invoice' }
+  /invoices/invoice_summary:
+    get:
+      operationId: getInvoiceSummary
+      tags: [Invoices]
+      summary: Get invoice summary statistics
+      parameters:
+        - name: timeframe_filter
+          in: query
+          schema: { type: string }
+        - name: currency
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: Summary totals for invoices.
+          content:
+            application/json:
+              schema: { type: object }
+  /invoices/payments/list/:
+    get:
+      operationId: listInvoicePayments
+      tags: [Invoices]
+      summary: List payments across all invoices
+      parameters:
+        - name: expand
+          in: query
+          schema: { type: string, example: client }
+        - name: client_id
+          in: query
+          schema: { type: string }
+        - name: page_size
+          in: query
+          schema: { type: integer }
+      responses:
+        '200':
+          description: Paginated list of payments.
+          content:
+            application/json:
+              schema: { type: object }
+  /contracts/:
+    get:
+      operationId: listContracts
+      tags: [Contracts]
+      summary: List contracts
+      parameters:
+        - name: expand
+          in: query
+          schema: { type: string, example: all }
+        - name: page
+          in: query
+          schema: { type: integer }
+      responses:
+        '200':
+          description: Paginated list of contracts.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items: { $ref: '#/components/schemas/Contract' }
+  /contracts/{contract_id}:
+    get:
+      operationId: getContract
+      tags: [Contracts]
+      summary: Get contract details
+      parameters:
+        - name: contract_id
+          in: path
+          required: true
+          schema: { type: string, example: co_CON001ABC123DEF456GHI789JKL012 }
+        - name: expand
+          in: query
+          schema: { type: string, example: all }
+      responses:
+        '200':
+          description: Contract detail with rendered content and signatures.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: { $ref: '#/components/schemas/Contract' }
+  /templates/contracts:
+    get:
+      operationId: listContractTemplates
+      tags: [Contracts]
+      summary: List contract templates
+      responses:
+        '200':
+          description: List of contract templates.
+          content:
+            application/json:
+              schema: { type: object }
+  /templates/contracts/{template_id}:
+    get:
+      operationId: getContractTemplate
+      tags: [Contracts]
+      summary: Get contract template details
+      parameters:
+        - name: template_id
+          in: path
+          required: true
+          schema: { type: string, example: ct_CON002ABC123DEF456GHI789JKL012 }
+      responses:
+        '200':
+          description: Contract template detail with HTML body and variables.
+          content:
+            application/json:
+              schema: { type: object }
+    put:
+      operationId: updateContractTemplate
+      tags: [Contracts]
+      summary: Update a contract template
+      parameters:
+        - name: template_id
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        content:
+          application/json:
+            schema: { type: object }
+      responses:
+        '200':
+          description: Updated contract template.
+          content:
+            application/json:
+              schema: { type: object }
+  /collections/{collection_id}:
+    get:
+      operationId: getCollection
+      tags: [Collections]
+      summary: Get gallery collection details
+      servers:
+        - url: https://galleries.pixieset.com/api/v1
+      parameters:
+        - name: collection_id
+          in: path
+          required: true
+          schema: { type: integer, example: 90516387 }
+        - name: expand
+          in: query
+          schema: { type: string, example: video_cover }
+      responses:
+        '200':
+          description: Collection detail.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: { $ref: '#/components/schemas/Collection' }
+  /collections/{collection_id}/galleries:
+    get:
+      operationId: listCollectionGalleries
+      tags: [Collections]
+      summary: List galleries in a collection
+      servers:
+        - url: https://galleries.pixieset.com/api/v1
+      parameters:
+        - name: collection_id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        '200':
+          description: Galleries within the collection.
+          content:
+            application/json:
+              schema: { type: object }
+  /collections/{collection_id}/clients:
+    get:
+      operationId: listCollectionClients
+      tags: [Collections]
+      summary: List clients with access to a collection
+      servers:
+        - url: https://galleries.pixieset.com/api/v1
+      parameters:
+        - name: collection_id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        '200':
+          description: Clients with access, permission level, and favorites count.
+          content:
+            application/json:
+              schema: { type: object }
+  /collections/{collection_id}/downloads/:
+    get:
+      operationId: listCollectionDownloads
+      tags: [Collections]
+      summary: List all download activity for a collection
+      servers:
+        - url: https://galleries.pixieset.com/api/v1
+      parameters:
+        - name: collection_id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        '200':
+          description: Combined photo and video download activity.
+          content:
+            application/json:
+              schema: { type: object }
+  /collections/{collection_id}/favorites:
+    get:
+      operationId: listCollectionFavorites
+      tags: [Collections]
+      summary: List client-favorited photos and videos in a collection
+      servers:
+        - url: https://galleries.pixieset.com/api/v1
+      parameters:
+        - name: collection_id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        '200':
+          description: Favorited media with client attribution.
+          content:
+            application/json:
+              schema: { type: object }
+components:
+  securitySchemes:
+    sessionCookie:
+      type: apiKey
+      in: cookie
+      name: session_cookie
+      description: >-
+        Session cookie issued by the Pixieset web login flow
+        (studio.pixieset.com/login or galleries.pixieset.com/login). This is
+        the internal web-app session mechanism, not a published API-key or
+        OAuth developer credential - Pixieset does not offer either for
+        third-party use. Write operations additionally require an
+        X-CSRF-Token header per the reverse-engineered documentation.
+  schemas:
+    Client:
+      type: object
+      properties:
+        id: { type: string, example: cl_ABC123DEF456GHI789JKL012MNO345 }
+        email: { type: string }
+        first_name: { type: string }
+        last_name: { type: string }
+        phone: { type: string }
+        company: { type: string, nullable: true }
+        status_name: { type: string, example: Active }
+        type: { type: string, enum: [client, lead, other] }
+        created_at: { type: string, format: date-time }
+    ClientListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items: { $ref: '#/components/schemas/Client' }
+        meta:
+          type: object
+          properties:
+            current_page: { type: integer }
+            per_page: { type: integer }
+            total: { type: integer }
+    SessionType:
+      type: object
+      properties:
+        id: { type: string, example: set_SES001ABC123DEF456GHI789JKL012 }
+        name: { type: string }
+        status: { type: string, enum: [published, draft] }
+        duration: { type: integer, description: Minutes }
+        location: { type: string }
+        payment_amount_full: { type: integer, description: Smallest currency unit }
+        currency: { type: string, example: gbp }
+        collect_payment: { type: boolean }
+    Invoice:
+      type: object
+      properties:
+        id: { type: string, example: in_INV001ABC123DEF456GHI789JKL012 }
+        invoice_number: { type: string }
+        amount: { type: integer, description: Smallest currency unit }
+        amount_formatted: { type: string }
+        currency: { type: string }
+        status: { type: string, enum: [draft, sent, paid, overdue] }
+        due_date: { type: string, format: date }
+        client: { $ref: '#/components/schemas/Client' }
+    Contract:
+      type: object
+      properties:
+        id: { type: string, example: co_CON001ABC123DEF456GHI789JKL012 }
+        contract_number: { type: string }
+        status:
+          type: string
+          enum: [draft, sent, viewed, partially_signed, signed, expired, cancelled]
+        due_date: { type: string, format: date-time }
+        signed_date: { type: string, format: date-time, nullable: true }
+        client: { $ref: '#/components/schemas/Client' }
+    Collection:
+      type: object
+      properties:
+        id: { type: integer, example: 90516387 }
+        name: { type: string }
+        description: { type: string }
+        gallery_count: { type: integer }
+        photo_count: { type: integer }
+        video_count: { type: integer }
+        password_protected: { type: boolean }
+        downloadable: { type: boolean }
+        expiry_date: { type: string, format: date, nullable: true }

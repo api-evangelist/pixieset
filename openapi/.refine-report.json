@@ -1,0 +1,22 @@
+{
+  "provider": "pixieset",
+  "sources": [
+    "pixieset-clients-api-openapi.yml",
+    "pixieset-collections-api-openapi.yml",
+    "pixieset-contracts-api-openapi.yml",
+    "pixieset-invoices-api-openapi.yml",
+    "pixieset-sessions-api-openapi.yml"
+  ],
+  "outputs": [
+    "pixieset-clients-api-openapi.yml",
+    "pixieset-collections-api-openapi.yml",
+    "pixieset-contracts-api-openapi.yml",
+    "pixieset-invoices-api-openapi.yml",
+    "pixieset-sessions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
