@@ -1,0 +1,87 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pixieset Studio & Gallery API (Modeled, Unofficial) Clients Sessions API",
+    "version": "1.0-modeled"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "session_cookie",
+      "value": "{{session_cookie}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List session types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://studio.pixieset.com/api/v1/session_types/"
+          },
+          "docs": "Bookable service definitions with scheduling and payment config."
+        },
+        {
+          "info": {
+            "name": "Create a session type",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://studio.pixieset.com/api/v1/session_types/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a session type"
+        },
+        {
+          "info": {
+            "name": "Check day availability for a session type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://studio.pixieset.com/api/v1/session_types/:session_type_id/check-day-avail/:date_timezone",
+            "params": [
+              {
+                "name": "session_type_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "date_timezone",
+                "value": "",
+                "type": "path",
+                "description": "Format: YYYY-M-D-Area/City, e.g. 2025-8-7-Europe/London"
+              }
+            ]
+          },
+          "docs": "Check day availability for a session type"
+        },
+        {
+          "info": {
+            "name": "List booked sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://studio.pixieset.com/api/v1/sessions"
+          },
+          "docs": "List booked sessions"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

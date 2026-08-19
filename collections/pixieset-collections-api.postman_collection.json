@@ -1,0 +1,585 @@
+{
+  "item": [
+    {
+      "id": "588167aa-57b9-467e-bf70-653d6f74756c",
+      "name": "Collections",
+      "description": {
+        "content": "Gallery collections, access, and downloads.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e983b040-9463-4630-a6f9-a50cba43ebf0",
+          "name": "Get gallery collection details",
+          "request": {
+            "name": "Get gallery collection details",
+            "description": {},
+            "url": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v1",
+                "collections",
+                ":collection_id"
+              ],
+              "host": [
+                "galleries",
+                "pixieset",
+                "com"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "expand",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "collection_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1f31e65f-ca16-47fe-ad47-fb14672e8987",
+              "name": "Collection detail.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "api",
+                    "v1",
+                    "collections",
+                    ":collection_id"
+                  ],
+                  "host": [
+                    "galleries",
+                    "pixieset",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "expand",
+                      "value": "video_cover"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "collection_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "session_cookie",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 90516387,\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"gallery_count\": 2793,\n    \"photo_count\": 3085,\n    \"video_count\": 8368,\n    \"password_protected\": false,\n    \"downloadable\": false,\n    \"expiry_date\": \"1991-08-23\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8b3d77fe-28d3-452b-a568-f25b3eca3123",
+          "name": "List galleries in a collection",
+          "request": {
+            "name": "List galleries in a collection",
+            "description": {},
+            "url": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v1",
+                "collections",
+                ":collection_id",
+                "galleries"
+              ],
+              "host": [
+                "galleries",
+                "pixieset",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "collection_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "34a4f956-f482-4767-afa0-ffae9edc967f",
+              "name": "Galleries within the collection.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "api",
+                    "v1",
+                    "collections",
+                    ":collection_id",
+                    "galleries"
+                  ],
+                  "host": [
+                    "galleries",
+                    "pixieset",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "collection_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "session_cookie",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6c092003-88f7-46f8-9945-6da5451adca9",
+          "name": "List clients with access to a collection",
+          "request": {
+            "name": "List clients with access to a collection",
+            "description": {},
+            "url": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v1",
+                "collections",
+                ":collection_id",
+                "clients"
+              ],
+              "host": [
+                "galleries",
+                "pixieset",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "collection_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e0458231-fe49-4369-9053-bbafdbd4a71c",
+              "name": "Clients with access, permission level, and favorites count.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "api",
+                    "v1",
+                    "collections",
+                    ":collection_id",
+                    "clients"
+                  ],
+                  "host": [
+                    "galleries",
+                    "pixieset",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "collection_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "session_cookie",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "246d6ef4-437f-4ee9-b771-634900f36cd9",
+          "name": "List all download activity for a collection",
+          "request": {
+            "name": "List all download activity for a collection",
+            "description": {},
+            "url": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v1",
+                "collections",
+                ":collection_id",
+                "downloads",
+                ""
+              ],
+              "host": [
+                "galleries",
+                "pixieset",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "collection_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d762bf8c-b68c-4b99-b6f4-5d41b60c12c4",
+              "name": "Combined photo and video download activity.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "api",
+                    "v1",
+                    "collections",
+                    ":collection_id",
+                    "downloads",
+                    ""
+                  ],
+                  "host": [
+                    "galleries",
+                    "pixieset",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "collection_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "session_cookie",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d8455830-99f7-4486-9080-d47f0f09a489",
+          "name": "List client-favorited photos and videos in a collection",
+          "request": {
+            "name": "List client-favorited photos and videos in a collection",
+            "description": {},
+            "url": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v1",
+                "collections",
+                ":collection_id",
+                "favorites"
+              ],
+              "host": [
+                "galleries",
+                "pixieset",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "collection_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "23e19ca1-7951-402e-91b5-154caeab6194",
+              "name": "Favorited media with client attribution.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "api",
+                    "v1",
+                    "collections",
+                    ":collection_id",
+                    "favorites"
+                  ],
+                  "host": [
+                    "galleries",
+                    "pixieset",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "collection_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "session_cookie",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://studio.pixieset.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "session_cookie"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9a1e5e76-5738-4bff-94ae-a317c8f69ab8",
+    "name": "Pixieset Studio & Gallery API (Modeled, Unofficial) Clients Collections API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Pixieset does not publish a public or partner developer API - there is no self-serve API key or OAuth signup, no official API reference, and no developer program. The endpoints below model the internal, session-cookie -authenticated web APIs that power Pixieset's own Studio Manager (studio.pixieset.com) and Client Gallery (galleries.pixieset.com) web apps, as documented by an independent third party (https://trozz.github.io/pixieset-api-docs/, \"unofficial documentation created through reverse engineering and API analysis... not affiliated with or endorsed by Pixieset\"). Paths, parameters, and response shapes are sourced from that community project (111+ endpoints catalogued there); only a representative subset is modeled here across Clients, Sessions, Invoices, Contracts, and Gallery Collections. Nothing here is independently verified against Pixieset's current implementation - treat this as a best-effort, sourced model rather than an authoritative reference, it may change or disappear without notice, and using it against Pixieset's production systems outside of your own account should be checked against Pixieset's Terms of Service.\n\nContact Support:\n Name: Pixieset",
+      "type": "text/plain"
+    }
+  }
+}

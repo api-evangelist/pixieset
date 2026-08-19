@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pixieset Studio & Gallery API (Modeled, Unofficial) Clients Collections API",
+    "version": "1.0-modeled"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "session_cookie",
+      "value": "{{session_cookie}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Collections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get gallery collection details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://studio.pixieset.com/api/v1/collections/:collection_id",
+            "params": [
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get gallery collection details"
+        },
+        {
+          "info": {
+            "name": "List galleries in a collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://studio.pixieset.com/api/v1/collections/:collection_id/galleries",
+            "params": [
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List galleries in a collection"
+        },
+        {
+          "info": {
+            "name": "List clients with access to a collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://studio.pixieset.com/api/v1/collections/:collection_id/clients",
+            "params": [
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List clients with access to a collection"
+        },
+        {
+          "info": {
+            "name": "List all download activity for a collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://studio.pixieset.com/api/v1/collections/:collection_id/downloads/",
+            "params": [
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List all download activity for a collection"
+        },
+        {
+          "info": {
+            "name": "List client-favorited photos and videos in a collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://studio.pixieset.com/api/v1/collections/:collection_id/favorites",
+            "params": [
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List client-favorited photos and videos in a collection"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

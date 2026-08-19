@@ -1,0 +1,123 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pixieset Studio & Gallery API (Modeled, Unofficial) Clients Contracts API",
+    "version": "1.0-modeled"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "session_cookie",
+      "value": "{{session_cookie}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contracts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List contracts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://studio.pixieset.com/api/v1/contracts/",
+            "params": [
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List contracts"
+        },
+        {
+          "info": {
+            "name": "Get contract details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://studio.pixieset.com/api/v1/contracts/:contract_id",
+            "params": [
+              {
+                "name": "contract_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get contract details"
+        },
+        {
+          "info": {
+            "name": "List contract templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://studio.pixieset.com/api/v1/templates/contracts"
+          },
+          "docs": "List contract templates"
+        },
+        {
+          "info": {
+            "name": "Get contract template details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://studio.pixieset.com/api/v1/templates/contracts/:template_id",
+            "params": [
+              {
+                "name": "template_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get contract template details"
+        },
+        {
+          "info": {
+            "name": "Update a contract template",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://studio.pixieset.com/api/v1/templates/contracts/:template_id",
+            "params": [
+              {
+                "name": "template_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a contract template"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

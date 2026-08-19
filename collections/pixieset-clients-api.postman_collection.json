@@ -1,0 +1,482 @@
+{
+  "item": [
+    {
+      "id": "51d68a38-8ed3-412e-b2be-52f536c25090",
+      "name": "Clients",
+      "description": {
+        "content": "Client and lead CRM records.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bed3f086-f339-4bda-a4f9-7d38cc9cf440",
+          "name": "List clients and leads",
+          "request": {
+            "name": "List clients and leads",
+            "description": {
+              "content": "Returns a paginated list of client/lead/other contact records. Modeled from the Studio API Clients & CRM reference.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "clients",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "25"
+                },
+                {
+                  "disabled": false,
+                  "key": "types",
+                  "value": "<string>",
+                  "description": "Comma-separated: client, lead, other"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2e9640a2-617a-4817-a66d-b5b440c204c2",
+              "name": "Paginated list of clients.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clients",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "25"
+                    },
+                    {
+                      "key": "types",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "session_cookie",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"cl_ABC123DEF456GHI789JKL012MNO345\",\n      \"email\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"phone\": \"string\",\n      \"company\": \"string\",\n      \"status_name\": \"Active\",\n      \"type\": \"lead\",\n      \"created_at\": \"1987-11-27T01:16:07.162Z\"\n    },\n    {\n      \"id\": \"cl_ABC123DEF456GHI789JKL012MNO345\",\n      \"email\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"phone\": \"string\",\n      \"company\": \"string\",\n      \"status_name\": \"Active\",\n      \"type\": \"client\",\n      \"created_at\": \"1953-08-04T15:53:31.632Z\"\n    }\n  ],\n  \"meta\": {\n    \"current_page\": 4454,\n    \"per_page\": 3268,\n    \"total\": 6796\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e7b6be1c-6838-4bd1-9b26-e0b53eaed5a0",
+          "name": "Search clients and leads",
+          "request": {
+            "name": "Search clients and leads",
+            "description": {},
+            "url": {
+              "path": [
+                "clients",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "types",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "daaa91c9-cb75-4f59-b02f-ad22e95db407",
+              "name": "Matching clients.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clients",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "session_cookie",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"cl_ABC123DEF456GHI789JKL012MNO345\",\n      \"email\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"phone\": \"string\",\n      \"company\": \"string\",\n      \"status_name\": \"Active\",\n      \"type\": \"other\",\n      \"created_at\": \"2007-09-10T12:07:58.035Z\"\n    },\n    {\n      \"id\": \"cl_ABC123DEF456GHI789JKL012MNO345\",\n      \"email\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"phone\": \"string\",\n      \"company\": \"string\",\n      \"status_name\": \"Active\",\n      \"type\": \"client\",\n      \"created_at\": \"1963-06-09T02:29:28.661Z\"\n    }\n  ],\n  \"meta\": {\n    \"current_page\": 299,\n    \"per_page\": 1053,\n    \"total\": 5641\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2847b172-dae5-48a9-a3a9-80b5f6258ece",
+          "name": "Get client details",
+          "request": {
+            "name": "Get client details",
+            "description": {},
+            "url": {
+              "path": [
+                "clients",
+                ":client_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "client_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5d2f59c9-ae6e-4f8e-8962-429aaf0718ca",
+              "name": "Client detail.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clients",
+                    ":client_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "session_cookie",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"cl_ABC123DEF456GHI789JKL012MNO345\",\n    \"email\": \"string\",\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"phone\": \"string\",\n    \"company\": \"string\",\n    \"status_name\": \"Active\",\n    \"type\": \"other\",\n    \"created_at\": \"1959-11-09T08:09:38.382Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2440c1e7-3a18-4245-b3ea-15255bb934bc",
+          "name": "Update a client",
+          "request": {
+            "name": "Update a client",
+            "description": {},
+            "url": {
+              "path": [
+                "clients",
+                ":client_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "client_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"email\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"company\": \"<string>\",\n  \"status_name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"created_at\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ff951215-e3ba-4185-b463-14cf32594fec",
+              "name": "Updated client.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clients",
+                    ":client_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "session_cookie",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"cl_ABC123DEF456GHI789JKL012MNO345\",\n  \"email\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"company\": \"<string>\",\n  \"status_name\": \"Active\",\n  \"type\": \"<string>\",\n  \"created_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"cl_ABC123DEF456GHI789JKL012MNO345\",\n    \"email\": \"<string>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"company\": \"<string>\",\n    \"status_name\": \"Active\",\n    \"type\": \"<string>\",\n    \"created_at\": \"<dateTime>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://studio.pixieset.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "session_cookie"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "41dc3dcb-8ed3-4179-aaee-df704ccccc68",
+    "name": "Pixieset Studio & Gallery API (Modeled, Unofficial) Clients API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Pixieset does not publish a public or partner developer API - there is no self-serve API key or OAuth signup, no official API reference, and no developer program. The endpoints below model the internal, session-cookie -authenticated web APIs that power Pixieset's own Studio Manager (studio.pixieset.com) and Client Gallery (galleries.pixieset.com) web apps, as documented by an independent third party (https://trozz.github.io/pixieset-api-docs/, \"unofficial documentation created through reverse engineering and API analysis... not affiliated with or endorsed by Pixieset\"). Paths, parameters, and response shapes are sourced from that community project (111+ endpoints catalogued there); only a representative subset is modeled here across Clients, Sessions, Invoices, Contracts, and Gallery Collections. Nothing here is independently verified against Pixieset's current implementation - treat this as a best-effort, sourced model rather than an authoritative reference, it may change or disappear without notice, and using it against Pixieset's production systems outside of your own account should be checked against Pixieset's Terms of Service.\n\nContact Support:\n Name: Pixieset",
+      "type": "text/plain"
+    }
+  }
+}

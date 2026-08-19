@@ -1,0 +1,413 @@
+{
+  "item": [
+    {
+      "id": "5aa8c566-dd65-44b8-a19a-c497ef62860b",
+      "name": "Sessions",
+      "description": {
+        "content": "Bookable session types, scheduling, and availability.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "98c6cdd4-0ec8-4e12-a83c-51dd8fc2ba29",
+          "name": "List session types",
+          "request": {
+            "name": "List session types",
+            "description": {
+              "content": "Bookable service definitions with scheduling and payment config.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "session_types",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b1c395dc-9835-444d-b31b-48f3ba671aaa",
+              "name": "List of session types.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session_types",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "session_cookie",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"set_SES001ABC123DEF456GHI789JKL012\",\n      \"name\": \"string\",\n      \"status\": \"draft\",\n      \"duration\": 5119,\n      \"location\": \"string\",\n      \"payment_amount_full\": 1080,\n      \"currency\": \"gbp\",\n      \"collect_payment\": true\n    },\n    {\n      \"id\": \"set_SES001ABC123DEF456GHI789JKL012\",\n      \"name\": \"string\",\n      \"status\": \"published\",\n      \"duration\": 8185,\n      \"location\": \"string\",\n      \"payment_amount_full\": 9172,\n      \"currency\": \"gbp\",\n      \"collect_payment\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9a260356-4ac7-4f4b-89cc-ba60014d7f6e",
+          "name": "Create a session type",
+          "request": {
+            "name": "Create a session type",
+            "description": {},
+            "url": {
+              "path": [
+                "session_types",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"status\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"location\": \"<string>\",\n  \"payment_amount_full\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"collect_payment\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "186311e4-27bc-435b-bd45-a20138bc2952",
+              "name": "Created session type.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session_types",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "session_cookie",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"set_SES001ABC123DEF456GHI789JKL012\",\n  \"name\": \"<string>\",\n  \"status\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"location\": \"<string>\",\n  \"payment_amount_full\": \"<integer>\",\n  \"currency\": \"gbp\",\n  \"collect_payment\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"set_SES001ABC123DEF456GHI789JKL012\",\n    \"name\": \"<string>\",\n    \"status\": \"<string>\",\n    \"duration\": \"<integer>\",\n    \"location\": \"<string>\",\n    \"payment_amount_full\": \"<integer>\",\n    \"currency\": \"gbp\",\n    \"collect_payment\": \"<boolean>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "202a328a-d5d4-4265-956f-b5942e6b334e",
+          "name": "Check day availability for a session type",
+          "request": {
+            "name": "Check day availability for a session type",
+            "description": {},
+            "url": {
+              "path": [
+                "session_types",
+                ":session_type_id",
+                "check-day-avail",
+                ":date_timezone"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "session_type_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "date_timezone",
+                  "description": "(Required) Format: YYYY-M-D-Area/City, e.g. 2025-8-7-Europe/London"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e508cd0f-cbfa-4ebe-b79b-c6f28ea2e032",
+              "name": "Availability for the requested day.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session_types",
+                    ":session_type_id",
+                    "check-day-avail",
+                    ":date_timezone"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_type_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "date_timezone",
+                      "description": "(Required) Format: YYYY-M-D-Area/City, e.g. 2025-8-7-Europe/London"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "session_cookie",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2493b0ef-a2e2-46b5-abaf-06405ad82e42",
+          "name": "List booked sessions",
+          "request": {
+            "name": "List booked sessions",
+            "description": {},
+            "url": {
+              "path": [
+                "sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4a97fe8a-9f6b-4c9f-a1e4-08a528f54a72",
+              "name": "Booked sessions with client and session-type info.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "session_cookie",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://studio.pixieset.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "session_cookie"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e43fb88a-af20-4203-b37d-2a5ea654a8d0",
+    "name": "Pixieset Studio & Gallery API (Modeled, Unofficial) Clients Sessions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Pixieset does not publish a public or partner developer API - there is no self-serve API key or OAuth signup, no official API reference, and no developer program. The endpoints below model the internal, session-cookie -authenticated web APIs that power Pixieset's own Studio Manager (studio.pixieset.com) and Client Gallery (galleries.pixieset.com) web apps, as documented by an independent third party (https://trozz.github.io/pixieset-api-docs/, \"unofficial documentation created through reverse engineering and API analysis... not affiliated with or endorsed by Pixieset\"). Paths, parameters, and response shapes are sourced from that community project (111+ endpoints catalogued there); only a representative subset is modeled here across Clients, Sessions, Invoices, Contracts, and Gallery Collections. Nothing here is independently verified against Pixieset's current implementation - treat this as a best-effort, sourced model rather than an authoritative reference, it may change or disappear without notice, and using it against Pixieset's production systems outside of your own account should be checked against Pixieset's Terms of Service.\n\nContact Support:\n Name: Pixieset",
+      "type": "text/plain"
+    }
+  }
+}

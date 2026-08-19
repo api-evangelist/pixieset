@@ -1,0 +1,128 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pixieset Studio & Gallery API (Modeled, Unofficial) Clients API",
+    "version": "1.0-modeled"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "session_cookie",
+      "value": "{{session_cookie}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Clients",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List clients and leads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://studio.pixieset.com/api/v1/clients/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "types",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated: client, lead, other"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of client/lead/other contact records. Modeled from the Studio API Clients & CRM reference."
+        },
+        {
+          "info": {
+            "name": "Search clients and leads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://studio.pixieset.com/api/v1/clients/search",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "types",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search clients and leads"
+        },
+        {
+          "info": {
+            "name": "Get client details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://studio.pixieset.com/api/v1/clients/:client_id",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get client details"
+        },
+        {
+          "info": {
+            "name": "Update a client",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://studio.pixieset.com/api/v1/clients/:client_id",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a client"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

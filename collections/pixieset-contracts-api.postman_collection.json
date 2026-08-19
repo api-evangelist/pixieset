@@ -1,0 +1,538 @@
+{
+  "item": [
+    {
+      "id": "a0cae7d0-9dc1-4fe8-8a32-0b78c753c20d",
+      "name": "Contracts",
+      "description": {
+        "content": "Contracts and contract templates.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "509078de-d825-4801-86a4-73f271ab72ac",
+          "name": "List contracts",
+          "request": {
+            "name": "List contracts",
+            "description": {},
+            "url": {
+              "path": [
+                "contracts",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "expand",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "887265df-25c2-46c5-bf5a-042286c4c77b",
+              "name": "Paginated list of contracts.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contracts",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expand",
+                      "value": "all"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "session_cookie",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"co_CON001ABC123DEF456GHI789JKL012\",\n      \"contract_number\": \"string\",\n      \"status\": \"viewed\",\n      \"due_date\": \"2011-01-09T19:21:42.012Z\",\n      \"signed_date\": \"1958-03-19T18:04:58.542Z\",\n      \"client\": {\n        \"id\": \"cl_ABC123DEF456GHI789JKL012MNO345\",\n        \"email\": \"string\",\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"phone\": \"string\",\n        \"company\": \"string\",\n        \"status_name\": \"Active\",\n        \"type\": \"lead\",\n        \"created_at\": \"1989-07-31T12:11:54.198Z\"\n      }\n    },\n    {\n      \"id\": \"co_CON001ABC123DEF456GHI789JKL012\",\n      \"contract_number\": \"string\",\n      \"status\": \"cancelled\",\n      \"due_date\": \"1947-01-09T17:32:26.992Z\",\n      \"signed_date\": \"1975-04-09T15:58:19.227Z\",\n      \"client\": {\n        \"id\": \"cl_ABC123DEF456GHI789JKL012MNO345\",\n        \"email\": \"string\",\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"phone\": \"string\",\n        \"company\": \"string\",\n        \"status_name\": \"Active\",\n        \"type\": \"other\",\n        \"created_at\": \"2000-03-06T11:54:51.249Z\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d88ed21a-56f5-4bd4-af79-ae38aa488d61",
+          "name": "Get contract details",
+          "request": {
+            "name": "Get contract details",
+            "description": {},
+            "url": {
+              "path": [
+                "contracts",
+                ":contract_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "expand",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contract_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "573c81f3-26e6-4cea-b8d7-36378ddf8aab",
+              "name": "Contract detail with rendered content and signatures.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contracts",
+                    ":contract_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expand",
+                      "value": "all"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contract_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "session_cookie",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"co_CON001ABC123DEF456GHI789JKL012\",\n    \"contract_number\": \"string\",\n    \"status\": \"sent\",\n    \"due_date\": \"2024-11-05T11:41:28.811Z\",\n    \"signed_date\": \"1963-12-18T07:04:04.186Z\",\n    \"client\": {\n      \"id\": \"cl_ABC123DEF456GHI789JKL012MNO345\",\n      \"email\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"phone\": \"string\",\n      \"company\": \"string\",\n      \"status_name\": \"Active\",\n      \"type\": \"other\",\n      \"created_at\": \"2019-06-15T00:04:56.335Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "746c1354-182e-4105-ae9b-b3a9f15ca24b",
+          "name": "List contract templates",
+          "request": {
+            "name": "List contract templates",
+            "description": {},
+            "url": {
+              "path": [
+                "templates",
+                "contracts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a6cbdcba-40fc-42d6-80ad-40b107dabdc3",
+              "name": "List of contract templates.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "templates",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "session_cookie",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "857a7c10-0ad9-4f16-aff5-ce639c09862c",
+          "name": "Get contract template details",
+          "request": {
+            "name": "Get contract template details",
+            "description": {},
+            "url": {
+              "path": [
+                "templates",
+                "contracts",
+                ":template_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "template_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3d24d8e8-90a8-4fd6-aa72-f81305a2e63d",
+              "name": "Contract template detail with HTML body and variables.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "templates",
+                    "contracts",
+                    ":template_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "template_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "session_cookie",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "77680731-f90e-46b0-8c91-5c9e29bb63e0",
+          "name": "Update a contract template",
+          "request": {
+            "name": "Update a contract template",
+            "description": {},
+            "url": {
+              "path": [
+                "templates",
+                "contracts",
+                ":template_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "template_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "62f54a6a-f21b-4987-b2b6-aef1e9952e46",
+              "name": "Updated contract template.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "templates",
+                    "contracts",
+                    ":template_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "template_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "session_cookie",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://studio.pixieset.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "session_cookie"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a3e522b3-4e0d-4bbf-abd9-c31b6fc9eb92",
+    "name": "Pixieset Studio & Gallery API (Modeled, Unofficial) Clients Contracts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Pixieset does not publish a public or partner developer API - there is no self-serve API key or OAuth signup, no official API reference, and no developer program. The endpoints below model the internal, session-cookie -authenticated web APIs that power Pixieset's own Studio Manager (studio.pixieset.com) and Client Gallery (galleries.pixieset.com) web apps, as documented by an independent third party (https://trozz.github.io/pixieset-api-docs/, \"unofficial documentation created through reverse engineering and API analysis... not affiliated with or endorsed by Pixieset\"). Paths, parameters, and response shapes are sourced from that community project (111+ endpoints catalogued there); only a representative subset is modeled here across Clients, Sessions, Invoices, Contracts, and Gallery Collections. Nothing here is independently verified against Pixieset's current implementation - treat this as a best-effort, sourced model rather than an authoritative reference, it may change or disappear without notice, and using it against Pixieset's production systems outside of your own account should be checked against Pixieset's Terms of Service.\n\nContact Support:\n Name: Pixieset",
+      "type": "text/plain"
+    }
+  }
+}

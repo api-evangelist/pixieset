@@ -1,0 +1,133 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pixieset Studio & Gallery API (Modeled, Unofficial) Clients Invoices API",
+    "version": "1.0-modeled"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "session_cookie",
+      "value": "{{session_cookie}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Invoices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://studio.pixieset.com/api/v1/invoices/",
+            "params": [
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "timeframe_filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "payment_type",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List invoices"
+        },
+        {
+          "info": {
+            "name": "Get invoice details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://studio.pixieset.com/api/v1/invoices/:invoice_id",
+            "params": [
+              {
+                "name": "invoice_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get invoice details"
+        },
+        {
+          "info": {
+            "name": "Get invoice summary statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://studio.pixieset.com/api/v1/invoices/invoice_summary",
+            "params": [
+              {
+                "name": "timeframe_filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get invoice summary statistics"
+        },
+        {
+          "info": {
+            "name": "List payments across all invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://studio.pixieset.com/api/v1/invoices/payments/list/",
+            "params": [
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List payments across all invoices"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

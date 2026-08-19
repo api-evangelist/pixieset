@@ -1,0 +1,475 @@
+{
+  "item": [
+    {
+      "id": "966004b1-c729-4f21-9fb1-27e5cc913fda",
+      "name": "Invoices",
+      "description": {
+        "content": "Invoices and payments.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "574127ea-09e4-4d8a-8f61-129a7d0464d7",
+          "name": "List invoices",
+          "request": {
+            "name": "List invoices",
+            "description": {},
+            "url": {
+              "path": [
+                "invoices",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "expand",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "timeframe_filter",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "payment_type",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0af2ed76-4a52-423c-886e-2a0d82fa9653",
+              "name": "Paginated list of invoices.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expand",
+                      "value": "client"
+                    },
+                    {
+                      "key": "timeframe_filter",
+                      "value": "this_month"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "usd"
+                    },
+                    {
+                      "key": "payment_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "session_cookie",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"in_INV001ABC123DEF456GHI789JKL012\",\n      \"invoice_number\": \"string\",\n      \"amount\": 7484,\n      \"amount_formatted\": \"string\",\n      \"currency\": \"string\",\n      \"status\": \"overdue\",\n      \"due_date\": \"1958-11-01\",\n      \"client\": {\n        \"id\": \"cl_ABC123DEF456GHI789JKL012MNO345\",\n        \"email\": \"string\",\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"phone\": \"string\",\n        \"company\": \"string\",\n        \"status_name\": \"Active\",\n        \"type\": \"client\",\n        \"created_at\": \"2011-09-22T18:09:52.733Z\"\n      }\n    },\n    {\n      \"id\": \"in_INV001ABC123DEF456GHI789JKL012\",\n      \"invoice_number\": \"string\",\n      \"amount\": 4253,\n      \"amount_formatted\": \"string\",\n      \"currency\": \"string\",\n      \"status\": \"draft\",\n      \"due_date\": \"1964-08-25\",\n      \"client\": {\n        \"id\": \"cl_ABC123DEF456GHI789JKL012MNO345\",\n        \"email\": \"string\",\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"phone\": \"string\",\n        \"company\": \"string\",\n        \"status_name\": \"Active\",\n        \"type\": \"other\",\n        \"created_at\": \"1984-06-08T03:43:20.099Z\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f877192d-1da1-4f53-b5d3-ea9637eb7899",
+          "name": "Get invoice details",
+          "request": {
+            "name": "Get invoice details",
+            "description": {},
+            "url": {
+              "path": [
+                "invoices",
+                ":invoice_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "expand",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "invoice_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b5b02074-5b15-4600-bd06-f1d9e4518660",
+              "name": "Invoice detail with line items and payments.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":invoice_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expand",
+                      "value": "all"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "invoice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "session_cookie",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"in_INV001ABC123DEF456GHI789JKL012\",\n    \"invoice_number\": \"string\",\n    \"amount\": 8987,\n    \"amount_formatted\": \"string\",\n    \"currency\": \"string\",\n    \"status\": \"draft\",\n    \"due_date\": \"2013-03-01\",\n    \"client\": {\n      \"id\": \"cl_ABC123DEF456GHI789JKL012MNO345\",\n      \"email\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"phone\": \"string\",\n      \"company\": \"string\",\n      \"status_name\": \"Active\",\n      \"type\": \"other\",\n      \"created_at\": \"1975-07-27T04:55:40.355Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "97282396-848d-4fe9-b4b6-3bd1f7fcfa7a",
+          "name": "Get invoice summary statistics",
+          "request": {
+            "name": "Get invoice summary statistics",
+            "description": {},
+            "url": {
+              "path": [
+                "invoices",
+                "invoice_summary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "timeframe_filter",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b2b269de-2a76-48c5-a3f3-22fb404d385f",
+              "name": "Summary totals for invoices.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    "invoice_summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timeframe_filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "session_cookie",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff17e415-d1bc-4216-afdb-7dd4e8916b3a",
+          "name": "List payments across all invoices",
+          "request": {
+            "name": "List payments across all invoices",
+            "description": {},
+            "url": {
+              "path": [
+                "invoices",
+                "payments",
+                "list",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "expand",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bea2dced-8b14-4754-9245-d600418c2ea3",
+              "name": "Paginated list of payments.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    "payments",
+                    "list",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expand",
+                      "value": "client"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "session_cookie",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://studio.pixieset.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "session_cookie"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6bd1a2bc-26cd-4963-9487-351f31bf1f9d",
+    "name": "Pixieset Studio & Gallery API (Modeled, Unofficial) Clients Invoices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Pixieset does not publish a public or partner developer API - there is no self-serve API key or OAuth signup, no official API reference, and no developer program. The endpoints below model the internal, session-cookie -authenticated web APIs that power Pixieset's own Studio Manager (studio.pixieset.com) and Client Gallery (galleries.pixieset.com) web apps, as documented by an independent third party (https://trozz.github.io/pixieset-api-docs/, \"unofficial documentation created through reverse engineering and API analysis... not affiliated with or endorsed by Pixieset\"). Paths, parameters, and response shapes are sourced from that community project (111+ endpoints catalogued there); only a representative subset is modeled here across Clients, Sessions, Invoices, Contracts, and Gallery Collections. Nothing here is independently verified against Pixieset's current implementation - treat this as a best-effort, sourced model rather than an authoritative reference, it may change or disappear without notice, and using it against Pixieset's production systems outside of your own account should be checked against Pixieset's Terms of Service.\n\nContact Support:\n Name: Pixieset",
+      "type": "text/plain"
+    }
+  }
+}
