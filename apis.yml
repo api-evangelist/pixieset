@@ -76,6 +76,8 @@ apis:
   humanURL: https://trozz.github.io/pixieset-api-docs/docs/studio-api/clients
   baseURL: https://studio.pixieset.com/api/v1
   tags:
+  - Collection
+  tags_raw:
   - Collections
   properties:
   - type: OpenAPI
