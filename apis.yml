@@ -19,6 +19,18 @@ description: Pixieset is an all-in-one photography business platform - client
   are modeled from that third-party reverse-engineering effort, not from any
   Pixieset-published reference - treat them as unverified and subject to
   change or removal without notice.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
