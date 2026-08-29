@@ -1,5 +1,8 @@
 aid: pixieset
 url: https://raw.githubusercontent.com/api-evangelist/pixieset/refs/heads/main/apis.yml
+x-api-posture: no-product-api
+x-api-posture-basis: observed
+x-api-posture-note: "This entry documents that real access model honestly - no public API exists, and the endpoint shapes below are modeled from that third-party reverse-engineering effort, not from any Pixieset-published"
 name: Pixieset
 kind: company
 description: Pixieset is an all-in-one photography business platform - client
