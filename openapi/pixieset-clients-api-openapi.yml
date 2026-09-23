@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Pixieset Studio & Gallery API (Modeled, Unofficial) Clients API
-  description: Pixieset does not publish a public or partner developer API - there is no self-serve API key or OAuth signup, no official API reference, and no developer program. The endpoints below model the internal, session-cookie -authenticated web APIs that power Pixieset's own Studio Manager (studio.pixieset.com) and Client Gallery (galleries.pixieset.com) web apps, as documented by an independent third party (https://trozz.github.io/pixieset-api-docs/, "unofficial documentation created through reverse engineering and API analysis... not affiliated with or endorsed by Pixieset"). Paths, parameters, and response shapes are sourced from that community project (111+ endpoints catalogued there); only a representative subset is modeled here across Clients, Sessions, Invoices, Contracts, and Gallery Collections. Nothing here is independently verified against Pixieset's current implementation - treat this as a best-effort, sourced model rather than an authoritative reference, it may change or disappear without notice, and using it against Pixieset's production systems outside of your own account should be checked against Pixieset's Terms of Service.
+  title: Pixieset Studio & Gallery API (Modeled, Unofficial) Clients…
+  description: Pixieset does not publish a public or partner developer API - there is no self-serve API key or OAuth signup, no official API reference, and no developer program.
   version: 1.0-modeled
   contact:
     name: Pixieset
@@ -149,8 +149,9 @@ components:
         phone:
           type: string
         company:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         status_name:
           type: string
           example: Active
