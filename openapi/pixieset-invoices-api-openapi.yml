@@ -139,33 +139,6 @@ paths:
                 type: object
 components:
   schemas:
-    Invoice:
-      type: object
-      properties:
-        id:
-          type: string
-          example: in_INV001ABC123DEF456GHI789JKL012
-        invoice_number:
-          type: string
-        amount:
-          type: integer
-          description: Smallest currency unit
-        amount_formatted:
-          type: string
-        currency:
-          type: string
-        status:
-          type: string
-          enum:
-          - draft
-          - sent
-          - paid
-          - overdue
-        due_date:
-          type: string
-          format: date
-        client:
-          $ref: '#/components/schemas/Client'
     Client:
       type: object
       properties:
@@ -196,6 +169,33 @@ components:
         created_at:
           type: string
           format: date-time
+    Invoice:
+      type: object
+      properties:
+        id:
+          type: string
+          example: in_INV001ABC123DEF456GHI789JKL012
+        invoice_number:
+          type: string
+        amount:
+          type: integer
+          description: Smallest currency unit
+        amount_formatted:
+          type: string
+        currency:
+          type: string
+        status:
+          type: string
+          enum:
+          - draft
+          - sent
+          - paid
+          - overdue
+        due_date:
+          type: string
+          format: date
+        client:
+          $ref: '#/components/schemas/Client'
   securitySchemes:
     sessionCookie:
       type: apiKey
