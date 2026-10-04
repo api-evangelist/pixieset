@@ -1,0 +1,46 @@
+slug: pixieset
+provider: Pixieset
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Invoices
+  spec_file: pixieset-invoices-api-openapi.yml
+  capability_id: BC-200.30
+  capability_id_l1: BC-200
+  capability_name: Accounts Receivable Management
+  confidence: 0.78
+  evidence: GET /invoices/  listInvoices; GET /invoices/payments/list/  listInvoicePayments  List payments
+    across all invoices
+  reason: Customer invoicing and payment tracking against those invoices is accounts receivable. Schemas
+    'Invoice, Client' confirm customer-side billing rather than payables.
+- tag: Contracts
+  spec_file: pixieset-contracts-api-openapi.yml
+  capability_id: BC-150.10
+  capability_id_l1: BC-150
+  capability_name: Contract Management
+  confidence: 0.73
+  evidence: GET /contracts/  listContracts  List contracts; GET /templates/contracts  listContractTemplates  List
+    contract templates
+  reason: Operations manage client contracts and contract templates, i.e. contract lifecycle artefacts.
+    Moderate confidence because these are customer-facing service agreements and could alternatively be
+    read as part of the sales/quoting motion.
+- tag: Clients
+  spec_file: pixieset-clients-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.72
+  evidence: GET /clients/  listClients  List clients and leads; PUT /clients/{client_id}  updateClient  Update
+    a client
+  reason: CRUD and search over client/lead records in the vendor's Studio Manager CRM — maintenance of
+    the customer master record. L2 slightly uncertain since 'leads' hints at pipeline management too.

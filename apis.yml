@@ -184,6 +184,9 @@ apis:
   - type: APIReference
     url: https://trozz.github.io/pixieset-api-docs/docs/gallery-api/collections
 common:
+- type: CapabilityMap
+  url: capabilities/pixieset-capability-edges.yml
+  name: Pixieset Business Capability Map
 - type: AgenticAccess
   url: agentic-access/pixieset-agentic-access.yml
 - type: DomainSecurity
