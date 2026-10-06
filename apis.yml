@@ -58,7 +58,7 @@ tags:
 - Contracts
 - No Public API
 created: '2026-07-04'
-modified: '2026-07-04'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: pixieset:pixieset-clients-api
@@ -184,6 +184,8 @@ apis:
   - type: APIReference
     url: https://trozz.github.io/pixieset-api-docs/docs/gallery-api/collections
 common:
+- url: https://blog.pixieset.com/feed/
+  type: BlogRSS
 - type: CapabilityMap
   url: capabilities/pixieset-capability-edges.yml
   name: Pixieset Business Capability Map
