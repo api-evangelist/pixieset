@@ -38,8 +38,11 @@ accessModel:
   pricing: freemium
   onboarding: self-serve
   trial: false
-  try_now: true
+  try_now: false
   public: false
+  gated: private
+  gated_source:
+  - tag:No Public API
   label: Freemium · Self-serve signup
   confidence: high
   source:
@@ -56,12 +59,12 @@ tags:
 - Booking
 - Invoicing
 - Contracts
-- No Public API
 created: '2026-07-04'
 modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: pixieset:pixieset-clients-api
+  x-published: false
   name: Pixieset Clients API
   description: Client and lead CRM records.
   humanURL: https://trozz.github.io/pixieset-api-docs/docs/studio-api/clients
@@ -86,6 +89,7 @@ apis:
   - type: APIReference
     url: https://trozz.github.io/pixieset-api-docs/docs/gallery-api/collections
 - aid: pixieset:pixieset-collections-api
+  x-published: false
   name: Pixieset Collections API
   description: Gallery collections, access, and downloads.
   humanURL: https://trozz.github.io/pixieset-api-docs/docs/studio-api/clients
@@ -112,6 +116,7 @@ apis:
   - type: APIReference
     url: https://trozz.github.io/pixieset-api-docs/docs/gallery-api/collections
 - aid: pixieset:pixieset-contracts-api
+  x-published: false
   name: Pixieset Contracts API
   description: Contracts and contract templates.
   humanURL: https://trozz.github.io/pixieset-api-docs/docs/studio-api/clients
@@ -136,6 +141,7 @@ apis:
   - type: APIReference
     url: https://trozz.github.io/pixieset-api-docs/docs/gallery-api/collections
 - aid: pixieset:pixieset-invoices-api
+  x-published: false
   name: Pixieset Invoices API
   description: Invoices and payments.
   humanURL: https://trozz.github.io/pixieset-api-docs/docs/studio-api/clients
@@ -160,6 +166,7 @@ apis:
   - type: APIReference
     url: https://trozz.github.io/pixieset-api-docs/docs/gallery-api/collections
 - aid: pixieset:pixieset-sessions-api
+  x-published: false
   name: Pixieset Sessions API
   description: Bookable session types, scheduling, and availability.
   humanURL: https://trozz.github.io/pixieset-api-docs/docs/studio-api/clients
@@ -206,3 +213,5 @@ common:
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
+x-tags-removed:
+- No Public API
