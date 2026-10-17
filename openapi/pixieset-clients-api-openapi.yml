@@ -134,6 +134,22 @@ paths:
                     $ref: '#/components/schemas/Client'
 components:
   schemas:
+    ClientListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Client'
+        meta:
+          type: object
+          properties:
+            current_page:
+              type: integer
+            per_page:
+              type: integer
+            total:
+              type: integer
     Client:
       type: object
       properties:
@@ -164,22 +180,6 @@ components:
         created_at:
           type: string
           format: date-time
-    ClientListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Client'
-        meta:
-          type: object
-          properties:
-            current_page:
-              type: integer
-            per_page:
-              type: integer
-            total:
-              type: integer
   securitySchemes:
     sessionCookie:
       type: apiKey
