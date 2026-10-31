@@ -1,4 +1,4 @@
-# Pixieset (pixieset)
+# Pixieset
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,131 +64,111 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Pixieset is an all-in-one photography business platform - client galleries, a store for print/digital sales, a website builder, a mobile gallery app, and Studio Manager (CRM, booking, invoicing, contracts, questionnaires) - used by hundreds of thousands of photographers.
+Pixieset is an all-in-one photography business platform - client galleries, a store for print/digital sales, a website builder, a mobile gallery app, and Studio Manager (CRM, booking, invoicing, contracts, questionnaires) - used by hundreds of thousands of photographers. Pixieset does not publish a public or partner developer API, does not run a developer program, and has no self-serve API keys or OAuth signup; there is no official API reference, SDK, or webhook system for third parties. The product itself is powered internally by two session-cookie-authenticated web APIs (a Studio API at studio.pixieset.com/api/v1 for business management and a Gallery API at galleries.pixieset.com/api/v1 for gallery delivery and e-commerce) that Pixieset's own web app calls, and which an independent developer has reverse-engineered and published as unofficial, unaffiliated documentation (111+ endpoints). This entry documents that real access model honestly - no public API exists, and the endpoint shapes below are modeled from that third-party reverse-engineering effort, not from any Pixieset-published reference - treat them as unverified and subject to change or removal without notice.
 
-**Access model:** Pixieset does not publish a public or partner developer API, does not run a developer program, and has no self-serve API keys or OAuth signup; there is no official API reference, SDK, or webhook system for third parties. The product itself is powered internally by two session-cookie-authenticated web APIs (a Studio API at `studio.pixieset.com/api/v1` for business management and a Gallery API at `galleries.pixieset.com/api/v1` for gallery delivery and e-commerce) that Pixieset's own web app calls, and which an independent developer has reverse-engineered and published as unofficial, unaffiliated documentation (111+ endpoints, [trozz.github.io/pixieset-api-docs](https://trozz.github.io/pixieset-api-docs/)). This entry documents that real access model honestly: no public API exists, and the endpoint shapes captured here are modeled from that third-party reverse-engineering effort, not from any Pixieset-published reference - treat them as unverified and subject to change or removal without notice. Pixieset also has no official Zapier or Make.com integration, and its own public status page ("Our Public API" at pixieset.instatus.com/public-api) monitors uptime only, with no link to developer documentation.
+**Areas:** Photography · Client Galleries · Studio Management · CRM · Booking · Invoicing · Contracts
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/pixieset/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/pixieset/refs/heads/main/apis.yml)
+## Pixieset on APIs.io
 
-## Tags
+Everything profiled for Pixieset is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/pixieset/](https://apis.io/providers/pixieset/)** — or go straight to one of the APIs or properties below.
 
-- Photography
-- Client Galleries
-- Studio Management
-- CRM
-- Booking
-- Invoicing
-- Contracts
-- No Public API
+### APIs (5)
 
-## Timestamps
+- [Pixieset Clients API](https://apis.io/apis/pixieset/pixieset-clients-api/) — Client and lead CRM records.
+- [Pixieset Collections API](https://apis.io/apis/pixieset/pixieset-collections-api/) — Gallery collections, access, and downloads.
+- [Pixieset Contracts API](https://apis.io/apis/pixieset/pixieset-contracts-api/) — Contracts and contract templates.
+- [Pixieset Invoices API](https://apis.io/apis/pixieset/pixieset-invoices-api/) — Invoices and payments.
+- [Pixieset Sessions API](https://apis.io/apis/pixieset/pixieset-sessions-api/) — Bookable session types, scheduling, and availability.
 
-- **Created:** 2026-07-04
-- **Modified:** 2026-07-04
+### Published properties
 
-## APIs
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### Pixieset Studio Clients & CRM API
+#### Agentic access (1)
 
-Internal client relationship management surface of Pixieset's own Studio web app - list, search, retrieve, and update clients and leads (id prefix `cl_`), their address info, notes, associated galleries, and documents. Not a Pixieset-published API; endpoint shapes are modeled from unofficial third-party reverse-engineering documentation and are unverified against Pixieset's current implementation.
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- **Human URL:** [https://trozz.github.io/pixieset-api-docs/docs/studio-api/clients](https://trozz.github.io/pixieset-api-docs/docs/studio-api/clients)
-- **Base URL:** `https://studio.pixieset.com/api/v1`
+- [Pixieset Agentic Access](https://apis.io/agentic-access/pixieset/pixieset-agentic-access/)
 
-#### Tags
+#### Collections (5)
 
-- Clients
-- CRM
-- Leads
+Postman and Open Collection request collections.
 
-#### Properties
+- [Pixieset Studio & Gallery API (Modeled, Unofficial) Clients API](https://apis.io/collections/pixieset/open-pixieset-clients-api/)
+- [Pixieset Studio & Gallery API (Modeled, Unofficial) Clients Collections API](https://apis.io/collections/pixieset/open-pixieset-collections-api/)
+- [Pixieset Studio & Gallery API (Modeled, Unofficial) Clients Contracts API](https://apis.io/collections/pixieset/open-pixieset-contracts-api/)
+- [Pixieset Studio & Gallery API (Modeled, Unofficial) Clients Invoices API](https://apis.io/collections/pixieset/open-pixieset-invoices-api/)
+- [Pixieset Studio & Gallery API (Modeled, Unofficial) Clients Sessions API](https://apis.io/collections/pixieset/open-pixieset-sessions-api/)
 
-- [Documentation](https://trozz.github.io/pixieset-api-docs/docs/studio-api/overview)
-- [API Reference](https://trozz.github.io/pixieset-api-docs/docs/studio-api/clients)
-- [OpenAPI](openapi/pixieset-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+#### Security (2)
 
-### Pixieset Studio Sessions & Booking API
+Authentication, trust centre, and vulnerability disclosure.
 
-Internal session-type and booking surface used by the Studio web app - define bookable session types (id prefix `set_`) with duration, location, pricing, and payment methods, check day/month availability, manage schedules and interval overrides, and list booked sessions and pending inquiries. Not a Pixieset-published API; modeled from unofficial reverse-engineering documentation, unverified against Pixieset's current implementation.
+- [Pixieset Authentication](https://apis.io/security/pixieset/pixieset-authentication/)
+- [Pixieset Domain Security](https://apis.io/security/pixieset/pixieset-domain-security/)
 
-- **Human URL:** [https://trozz.github.io/pixieset-api-docs/docs/studio-api/sessions](https://trozz.github.io/pixieset-api-docs/docs/studio-api/sessions)
-- **Base URL:** `https://studio.pixieset.com/api/v1`
+#### Plans and pricing (1)
 
-#### Tags
+Published plans, tiers and prices.
 
-- Sessions
-- Bookings
-- Scheduling
+- [Pixieset Plans Pricing](https://apis.io/plans/pixieset/pixieset-plans-pricing/)
 
-#### Properties
+## Where to find this API
 
-- [API Reference](https://trozz.github.io/pixieset-api-docs/docs/studio-api/sessions)
-- [OpenAPI](openapi/pixieset-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### Pixieset Studio Invoices & Payments API
-
-Internal invoicing and payment surface used by the Studio web app - list and retrieve invoices (id prefix `in_`) and line items in the smallest currency unit, read per-invoice and per-client payment records (id prefix `ip_`) including processor/transaction fees and card/PayPal details, invoice summaries and currency totals, and disputed-payment counts. Not a Pixieset-published API; modeled from unofficial reverse-engineering documentation, unverified against Pixieset's current implementation.
-
-- **Human URL:** [https://trozz.github.io/pixieset-api-docs/docs/studio-api/invoices](https://trozz.github.io/pixieset-api-docs/docs/studio-api/invoices)
-- **Base URL:** `https://studio.pixieset.com/api/v1`
-
-#### Tags
-
-- Invoices
-- Payments
-- Billing
-
-#### Properties
-
-- [API Reference](https://trozz.github.io/pixieset-api-docs/docs/studio-api/invoices)
-- [OpenAPI](openapi/pixieset-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-
-### Pixieset Studio Contracts API
-
-Internal contracts surface used by the Studio web app - list and retrieve client contracts (id prefix `co_`) with rendered HTML content, due dates, status, and multi-party signature records, plus manage reusable contract templates (id prefix `ct_`) with HTML body, `{{variable}}` placeholders, signer configuration, and due-day/reminder settings. Not a Pixieset-published API; modeled from unofficial reverse-engineering documentation, unverified against Pixieset's current implementation.
-
-- **Human URL:** [https://trozz.github.io/pixieset-api-docs/docs/studio-api/contracts](https://trozz.github.io/pixieset-api-docs/docs/studio-api/contracts)
-- **Base URL:** `https://studio.pixieset.com/api/v1`
-
-#### Tags
-
-- Contracts
-- Documents
-- E-Signature
-
-#### Properties
-
-- [API Reference](https://trozz.github.io/pixieset-api-docs/docs/studio-api/contracts)
-- [OpenAPI](openapi/pixieset-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-
-### Pixieset Gallery Collections & Delivery API
-
-Internal gallery-delivery surface used by Pixieset's client galleries product - manage collections that group galleries of photos and videos, control password protection, expiry, and per-client access, list collection clients and visitor emails, and track photo/video downloads, sharing links, and client favorites for the built-in print/digital-sales store. Not a Pixieset-published API; modeled from unofficial reverse-engineering documentation, unverified against Pixieset's current implementation.
-
-- **Human URL:** [https://trozz.github.io/pixieset-api-docs/docs/gallery-api/overview](https://trozz.github.io/pixieset-api-docs/docs/gallery-api/overview)
-- **Base URL:** `https://galleries.pixieset.com/api/v1`
-
-#### Tags
-
-- Galleries
-- Collections
-- Client Delivery
-- E-Commerce
-
-#### Properties
-
-- [Documentation](https://trozz.github.io/pixieset-api-docs/docs/gallery-api/overview)
-- [API Reference](https://trozz.github.io/pixieset-api-docs/docs/gallery-api/collections)
-- [OpenAPI](openapi/pixieset-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-
-## Common Properties
-
-- [LinkedIn](https://www.linkedin.com/company/pixieset)
 - [Website](https://pixieset.com)
 - [Documentation](https://help.pixieset.com/hc/en-us)
-- [Plans](plans/pixieset-plans-pricing.yml)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 21.5** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 35.3 |
+| Contract governance | 0.0 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 28.6 |
+| Access clarity | 7.9 |
+
+**Agent readiness 17.3** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 11.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/pixieset/](https://apis.io/providers/pixieset/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Pixieset: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/pixieset/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
